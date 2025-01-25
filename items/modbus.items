@@ -1,0 +1,45 @@
+// "Temperature [%d]"      {channel="modbus:data:sensorTHL_id_10:temperature:tempCelsius:number"}
+// Or, new for OH3, you can use a transformation profile to take the plain number from MQTT channel, append a units string, and pass to a Number:Temerature Item type.
+// Number:Temperature sesnsorTHL_Temperature "Temperature [%.1f °C]"   { channel="modbus:data:sensorTHL_id_10:temperature:tempCelsius:number"[ profile="modbus:gainOffset", gain="10 °C", pre-gain-offset="0" ] }
+// Number:Temperature sesnsorTHL_Temperature "Temperature [%.1f °C]"   { channel="modbus:data:sensorTHL_id_10:temperature:tempCelsius:number"[ profile="modbus:offset", gain="10 °C", pre-gain-offset="0" ] }
+
+
+// ?? profile gainOffset not working:
+// ?? Number:Temperature sesnsorTHL_Temperature    { channel="modbus:data:sensorTHL_id_10:temperature:tempCelsius:number"[ profile="modbus:gainOffset", gain="0.1 °C", pre-gain-offset="0" ] }
+
+Number:Temperature sesnsorTHL_Temperature   "Температура [%.1f °C]" <temperature>   (gTemperature_measurments, gBarn_Inside_Temperature, gPersstOnChngOn1min)       {channel="modbus:data:sensorTHL_id_10:sensorData:tempCelsius:number"}
+Number sensorTHL_Humidity       "Относителна влажност [%.1f %%Rh]"              <humidity>      (gPersstOnChngOn1min)   {channel="modbus:data:sensorTHL_id_10:sensorData:humidity:number"}
+Number sensorTHL_Luminosity     "Осветеност (Modbus THL) [%d lux]" <illuminance>    (gPersstOnChngOn1min)   {channel="modbus:data:sensorTHL_id_10:sensorData:lux:number"}
+// Number sensorTHL_Luminosity     "Illuminance (Modbus THL) [%d lux]" <illuminance>    (gPersstOnChngOn1min)   {channel="modbus:data:sensorTHL_id_10:sensorData:lux:number"}
+
+Number sensorNH3_amonia         "Амоняк (Modbus NH₃) [%.2f ppm]"    <amonia>        (gPersstOnChngOn1min)   {channel="modbus:data:sensorNH3_id_11:amonia:nh3:number"}
+
+Number sensorPM_2dot5      "Фини прахови частици 2.5 (Modbus PM2.5)  [%d ppm]"    <dustsmall>     (gPersstOnChngOn1min)   {channel="modbus:data:sensorParticulateMatter:particulatematter:pm2dot5:number"}
+Number sensorPM_10         "Фини прахови частици 10 (Modbus PM10)   [%d ppm]"     <dustbig>       (gPersstOnChngOn1min)   {channel="modbus:data:sensorParticulateMatter:particulatematter:pm10:number"}
+// Number sensorPM_10         "Particulate Matter 10 (Modbus PM10)   [%d ppm]"     <dustbig>       (gPersstOnChngOn1min)   {channel="modbus:data:sensorParticulateMatter:particulatematter:pm10:number"}
+
+Number sensorCH4_methane_lel                "Метан LEL (Lower Explosive Level) [%d %% LEL]"         <explosive_warning>     (gPersstOnChngOn1min)   {channel="modbus:data:sensorMethaneTH:sensorData:ch4_LEL:number"}
+Number sensorCH4_methane_ppm                "Метан (Modbus CH₄) [%d ppm]"                           <methane>       (gPersstOnChngOn1min)   
+Number:Temperature sensorCH4_Temperature    "ТЕМПЕРАТУРА (Modbus CH4) [%.1f °C]"                      <temperature>   (gPersstOnChngOn1min)   {channel="modbus:data:sensorMethaneTH:sensorData:temperatureC:number"}
+Number sensorCH4_Humidity                   "Относителна влажност (Modbus CH4) [%.1f %%Rh]"                       <humidity>      (gPersstOnChngOn1min)   {channel="modbus:data:sensorMethaneTH:sensorData:humidityPercent:number"}
+
+// ORNO 515 POWER METER
+// Number: ElectricPotential OU_V "Voltage [% .2f V]" <line> (OU_Counters, counters) {channel = "modbus: data: localSerial: volt: V: number"}
+Number Meter_Voltage                        "Voltage  [% .2f V]"                            <energy>          (gPersstOnChngOn1min)  { channel="modbus:data:energy_meter:volt:V:number" }
+Number Meter_Ampers                         "Ampers   [% .2f A]"                            <energy>          (gPersstOnChngOn1min)  { channel="modbus:data:energy_meter:ampers:A:number" }
+Number Meter_Power                          "Current power consumption   [%.0f W]"          <electric_meter>  (gPersstOnChngOn1min)  { channel="modbus:data:energy_meter:power:P:number" }
+Number Meter_Hz                             "Hz   [%.2f Hz]"                                <energy>          (gPersstOnChngOn1min)  { channel="modbus:data:energy_meter:Hz:Hz:number" }
+Number Meter_Reactive_power                 "Instantaneous reactive power [% d var]"        <energy>          (gPersstOnChngOn1min)  { channel="modbus:data:energy_meter:reactive_power:rP:number" }
+Number Meter_Apparent_power                 "Instantaneous apparent power [% d VA]"         <energy>          (gPersstOnChngOn1min)  { channel="modbus:data:energy_meter:apparent_power:aP:number" }
+Number Meter_Power_factor                   "Power_factor   [%.2f]"                         <energy>          (gPersstOnChngOn1min)  { channel="modbus:data:energy_meter:power_factor:Pf:number" }
+Number Meter_TotalKWh                       "НАГРЕВАТЕЛ БОЙЛЕР   [%.2f kWh]"                <electric_meter>  (gPersstOnChngOn1min)  { channel="modbus:data:energy_meter:totalkwh:totalkwh:number" }
+Number Meter_TotalKWhT1                     "totalkwhT1   [%.2f kWh]"                       <electric_meter>                         { channel="modbus:data:energy_meter:totalkwh:totalkwhT1:number" }
+Number Meter_TotalKWhT2                     "totalkwhT2   [%.2f kWh]"                       <electric_meter>                         { channel="modbus:data:energy_meter:totalkwh:totalkwhT2:number" }
+Number Meter_TotalKWhT3                     "totalkwhT3   [%.2f kWh]"                       <electric_meter>                         { channel="modbus:data:energy_meter:totalkwh:totalkwhT3:number" }
+Number Meter_TotalKWhT4                     "totalkwhT4   [%.2f kWh]"                       <electric_meter>                         { channel="modbus:data:energy_meter:totalkwh:totalkwhT4:number" }
+Number Meter_Totalkvarh                     "Meter readout reactive energy [% .2f kvar]"    <electric_meter>                         { channel="modbus:data:energy_meter:totalkvarh:totalkvarh:number" }
+Number Meter_TotalkvarhT1                   "totalkvarhT1   [%.2f kvar]"                    <electric_meter>                         { channel="modbus:data:energy_meter:totalkvarh:totalkvarhT1:number" }
+Number Meter_TotalkvarhT2                   "totalkvarhT2   [%.2f kvar]"                    <electric_meter>                         { channel="modbus:data:energy_meter:totalkvarh:totalkvarhT2:number" }
+Number Meter_TotalkvarhT3                   "totalkvarhT3   [%.2f kvar]"                    <electric_meter>                         { channel="modbus:data:energy_meter:totalkvarh:totalkvarhT3:number" }
+Number Meter_TotalkvarhT4                   "totalkvarhT4   [%.2f kvar]"                    <electric_meter>                         { channel="modbus:data:energy_meter:totalkvarh:totalkvarhT4:number" }
+ 

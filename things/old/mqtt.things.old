@@ -1,0 +1,136 @@
+Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.10.10.100", port=1883, secure=false, username="deviceusr", password="devicepass", clientID="oh3srv" ]
+
+{
+
+    // {"Time":"2022-01-28T17:30:40","AM2301":{"Temperature":23.6,"Humidity":31.7,"DewPoint":5.8},"BH1750":{"Illuminance":15},"TempUnit":"C"}
+    Thing topic multisensor1 "Multisensor" @ "Demo panel" {
+        Channels:
+            Type switch : power1                "Power1"                [ stateTopic="stat/multisensor_t_h_l/POWER1", commandTopic="cmnd/multisensor_t_h_l/POWER1" ]
+            Type switch : power2                "Power2"                [ stateTopic="stat/multisensor_t_h_l/POWER2", commandTopic="cmnd/multisensor_t_h_l/POWER2" ] 
+            Type string : reachable             "Reachable"             [ stateTopic="tele/multisensor_t_h_l/LWT" ]
+            Type number : rssi                  "WiFi Signal Strength"  [ stateTopic="tele/multisensor_t_h_l/STATE",  transformationPattern="JSONPATH:$.Wifi.RSSI"]
+            Type number : temperature_DHT22     "Temperature"           [ stateTopic="tele/multisensor_t_h_l/SENSOR", transformationPattern="JSONPATH:$.AM2301.Temperature" ]
+            Type number : humidity_DHT22        "Humidity"              [ stateTopic="tele/multisensor_t_h_l/SENSOR", transformationPattern="JSONPATH:$.AM2301.Humidity" ]        
+            Type number : dewpoint_DHT22        "Dewpoint"              [ stateTopic="tele/multisensor_t_h_l/SENSOR", transformationPattern="JSONPATH:$.AM2301.DewPoint" ]        
+            Type number : illuminance           "Illuminance"           [ stateTopic="tele/multisensor_t_h_l/SENSOR", transformationPattern="JSONPATH:$.BH1750.Illuminance" ]        
+            Type number : temperature_DS18B20   "Temperature"           [ stateTopic="tele/multisensor_t_h_l/SENSOR", transformationPattern="JSONPATH:$.DS18B20.Temperature" ]
+      
+      
+      
+        // Type number : temperature   "Temperature"           [ stateTopic="tele/sonoff_th16_6/SENSOR", transformationPattern="JSONPATH:$.DS18B20.Temperature" ]
+
+        // Type number : temperature   "Temperature"           [ stateTopic="tele/in_1/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
+        // Type number : humidity      "Humidity"              [ stateTopic="tele/in_1/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
+        // Type string : reachable     "Reachable"             [ stateTopic="tele/in_1/LWT" ]
+        // Type number : dewpoint      "Dew point"             [ stateTopic="tele/in_2/SENSOR", transformationPattern="JSONPATH:$.SHT3X.DewPoint" ]        
+    }
+
+    ///////////////// SensAir S8 CO@ sensor via ESPeasy ////////////////////////////////
+    // Thing topic espeasy_senseair_s8 "senseair_s8" @ "Demo panel" {
+    //     Channels:
+    //         Type number : co2                   "CO2"                   [ stateTopic="SenseAir_s8_controller/S8_CO2/co2" ]        
+    //         Type number : temperature           "Temperature"           [ stateTopic="SenseAir_s8_controller/S8_CO2/T"]
+    //         Type string : reachable             "Reachable"             [ stateTopic="SenseAir_s8_controller/status/LWT" ]
+    // }
+
+// Combined senseair_s8 and scd30 on the same NodeMcu with topic tele/senseair_s8/SENSOR
+// Will not change the topic for compatability with Items and Sitmap!!!!!!!!!!!!!
+    Thing topic senseair_s8 "senseair_s8" @ "Demo panel" {
+        Channels:
+            Type number : s8_co2                "CO2"           [ stateTopic="tele/senseair_s8/SENSOR", transformationPattern="JSONPATH:$.S8.CarbonDioxide" ]       
+            Type string : reachable             "Reachable"     [ stateTopic="tele/senseair_s8/LWT" ]
+            Type number : scd30_co2             "CarbonDioxide" [ stateTopic="tele/senseair_s8/SENSOR", transformationPattern="JSONPATH:$.SCD30.CarbonDioxide" ]       
+            Type number : scd30_eco2            "eCO2"          [ stateTopic="tele/senseair_s8/SENSOR", transformationPattern="JSONPATH:$.SCD30.eCO2" ]       
+            Type number : scd30_temperature     "Temperature"   [ stateTopic="tele/senseair_s8/SENSOR", transformationPattern="JSONPATH:$.SCD30.Temperature" ]       
+            Type number : scd30_humidity        "Humidity"      [ stateTopic="tele/senseair_s8/SENSOR", transformationPattern="JSONPATH:$.SCD30.Humidity" ]       
+            Type number : scd30_dewpoint        "DewPoint"      [ stateTopic="tele/senseair_s8/SENSOR", transformationPattern="JSONPATH:$.SCD30.DewPoint" ]       
+            Type string : reachable             "Reachable"     [ stateTopic="tele/scd30_co2/LWT" ]
+
+
+
+    }
+
+//     ///////////////// SensAir S8 CO@ sensor via TAMOTA ////////////////////////////////
+//     Thing topic senseair_s8 "senseair_s8" @ "Demo panel" {
+//         Channels:
+//             Type number : co2                   "CO2"                   [ stateTopic="tele/senseair_s8/SENSOR", transformationPattern="JSONPATH:$.S8.CarbonDioxide" ]       
+//             Type string : reachable             "Reachable"             [ stateTopic="tele/senseair_s8/LWT" ]
+//     }
+// // {"Time":"2022-02-08T12:44:44","SCD30":{"CarbonDioxide":780,"eCO2":810,"Temperature":29.4,"Humidity":23.3,"DewPoint":6.3},"TempUnit":"C"}
+//     Thing topic scd30 "scd30" @ "Demo panel" {
+//         Channels:
+//             Type number : co2                   "CarbonDioxide" [ stateTopic="tele/scd30_co2/SENSOR", transformationPattern="JSONPATH:$.SCD30.CarbonDioxide" ]       
+//             Type number : eco2                  "eCO2"          [ stateTopic="tele/scd30_co2/SENSOR", transformationPattern="JSONPATH:$.SCD30.eCO2" ]       
+//             Type number : temperature           "Temperature"   [ stateTopic="tele/scd30_co2/SENSOR", transformationPattern="JSONPATH:$.SCD30.Temperature" ]       
+//             Type number : humidity              "Humidity"      [ stateTopic="tele/scd30_co2/SENSOR", transformationPattern="JSONPATH:$.SCD30.Humidity" ]       
+//             Type number : dewpoint              "DewPoint"      [ stateTopic="tele/scd30_co2/SENSOR", transformationPattern="JSONPATH:$.SCD30.DewPoint" ]       
+//             Type string : reachable             "Reachable"     [ stateTopic="tele/scd30_co2/LWT" ]
+//     }
+
+// // {"Time":"2022-02-08T12:44:44","SCD30":{"CarbonDioxide":780,"eCO2":810,"Temperature":29.4,"Humidity":23.3,"DewPoint":6.3},"TempUnit":"C"}
+//     Thing topic scd30 "scd30" @ "Demo panel" {
+//         Channels:
+//             Type number : co2                   "CarbonDioxide" [ stateTopic="tele/scd30_co2/SENSOR", transformationPattern="JSONPATH:$.SCD30.CarbonDioxide" ]       
+//             Type number : eco2                  "eCO2"          [ stateTopic="tele/scd30_co2/SENSOR", transformationPattern="JSONPATH:$.SCD30.eCO2" ]       
+//             Type number : temperature           "Temperature"   [ stateTopic="tele/scd30_co2/SENSOR", transformationPattern="JSONPATH:$.SCD30.Temperature" ]       
+//             Type number : humidity              "Humidity"      [ stateTopic="tele/scd30_co2/SENSOR", transformationPattern="JSONPATH:$.SCD30.Humidity" ]       
+//             Type number : dewpoint              "DewPoint"      [ stateTopic="tele/scd30_co2/SENSOR", transformationPattern="JSONPATH:$.SCD30.DewPoint" ]       
+//             Type string : reachable             "Reachable"     [ stateTopic="tele/scd30_co2/LWT" ]
+//     }
+
+
+
+
+
+    Thing topic mh_z19b "mh_z19b" @ "Demo panel" {
+        Channels:
+            Type number : co2                   "CO2"                   [ stateTopic="tele/mh_z19b_co2/SENSOR", transformationPattern="JSONPATH:$.MHZ19B.CarbonDioxide" ]       
+            Type string : reachable             "Reachable"             [ stateTopic="tele/mh_z19b_co2/LWT" ]
+    }
+    
+    Thing topic fan_control "Fan controller" @ "Demo panel" {
+        Type switch   : power      "Power"      [ stateTopic="tele/blind_control/STATE", transformationPattern="JSONPATH:$.POWER" , commandTopic="cmnd/blind_control/POWER"]
+        Type dimmer   : dimmer     "Dimmer"     [ stateTopic="tele/blind_control/STATE", commandTopic="cmnd/blind_control/DIMMER", transformationPattern="JSONPATH:$.Dimmer" ]      
+        
+    //     // Example from https://www.openhab.org/addons/bindings/mqtt.generic/
+    //     // Type dimmer : blind "Blind" [ stateTopic="blind/state", commandTopic="blind/set", min=0, max=5, step=1 ]
+    }
+
+    Thing topic blinds_control "Blinds controller" @ "Demo panel" {
+        // Type switch   : power      "Power"      [ stateTopic="tele/blind_control/STATE", transformationPattern="JSONPATH:$.POWER" , commandTopic="cmnd/blind_control/POWER"]
+        // Type dimmer   : dimmer     "Dimmer"     [ stateTopic="tele/blind_control/STATE", commandTopic="cmnd/blind_control/SHUTTERPOSITION1", transformationPattern="JSONPATH:$.Dimmer" ]      
+        // Type rollershutter   : rshutter     "Rollershutter 1"     [ stateTopic="stat/blinds_control/RESULT", commandTopic="cmnd/blind_control/SHUTTER1", transformationPattern="JSONPATH:$.Shutter1.Position" ]      
+        
+        // Type rollershutter   : rsh     "only state"     [ stateTopic="stat/blinds_control/RESULT", transformationPattern="JSONPATH:$.Shutter1.Position" , autoupdate="false"]      
+        // Type rollershutter   : rsh     "no state"     [ stateTopic="stat/blinds_control/RESULT"]      
+        
+        
+        // Type rollershutter   : rshutter     "Rollershutter 1"     [ stateTopic="stat/blinds_control/RESULT", commandTopic="cmnd/blind_control/SHUTTER1", transformationPattern="JSONPATH:$.Shutter1.Position" , autoupdate="false"]      
+        // Type switch   : power1     "sw power1"     [ stateTopic="stat/blinds_control/POWER1", commandTopic="cmnd/blinds_control/POWER1" ]      
+        // Type switch   : power2     "sw power2"     [ stateTopic="stat/blinds_control/POWER2", commandTopic="cmnd/blinds_control/POWER2" ]
+
+        // Type rollershutter : dmr "using dimmer" [ stateTopic="stat/blinds_control/POWER2", commandTopic="cmnd/sonoff-DEXXXX/shutterposition" ]    
+        // Type rollershutter : dmr "using dimmer" [ stateTopic="stat/blinds_control/POWER2", commandTopic="cmnd/blinds_control/SHUTTER1" ]    
+        
+
+        // Type number : pos "pos"  [ stateTopic="stat/blinds_control/RESULT", transformationPattern="JSONPATH:$.Shutter1.Position" ]
+        Type number : pos "pos"  [ stateTopic="stat/blinds_control/RESULT", transformationPattern="JSONPATH:$.Shutter1.Position" ]
+        
+        // Type rollershutter : rs "UpDown" [ stateTopic="stat/blinds_control/SHUTTER1", commandTopic="cmnd/blinds_control/Backlog", UP="ShutterOpen1", DOWN="ShutterClose1" , STOP="ShutterStop1", up="up",down="down", stop="stop" ]
+        // Type rollershutter : rs "UpDown" [ stateTopic="stat/blinds_control/SHUTTER1", commandTopic="cmnd/blinds_control/Backlog", 100="ShutterOpen1", 0="ShutterClose1", STOP="ShutterStop1" ]
+
+        
+        // Example from https://www.openhab.org/addons/bindings/mqtt.generic/
+        // Type dimmer : blind "Blind" [ stateTopic="blind/state", commandTopic="blind/set", min=0, max=5, step=1 ]
+    }
+}
+// Example:
+// Channels:
+//     Type switch : switch        "Workroom Lights"   [ stateTopic="home/workroom/light/stat/POWER", commandTopic="home/workroom/light/cmnd/POWER", on="ON", off="OFF" ]
+//     Type string : wifi-ssid     "Wifi SSID"         [ stateTopic="home/workroom/light/tele/STATE", transformationPattern="JSONPATH:$.Wifi.SSId" ]
+//     Type string : wifi-rssi     "Wifi RSSI"         [ stateTopic="home/workroom/light/tele/STATE", transformationPattern="JSONPATH:$.Wifi.RSSI" ]
+//     Type string : uptime        "Uptime"            [ stateTopic="home/workroom/light/tele/STATE", transformationPattern="JSONPATH:$.Uptime" ]
+//     Type string : time          "Time"              [ stateTopic="home/workroom/light/tele/STATE", transformationPattern="JSONPATH:$.Time" ]
+//     Type string : devicestate   "Device State"      [ stateTopic="home/workroom/light/tele/LWT" ]
+
+// SHUTTERPOSITION1

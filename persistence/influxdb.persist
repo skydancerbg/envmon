@@ -1,0 +1,90 @@
+// Cron Expression Generator & Explainer
+// https://www.freeformatter.com/cron-expression-generator-quartz.html
+
+// ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !
+// openHAB makes use of Quartz Cron, which is slightly different from common cron in GNU/Linux.
+// The biggest difference (that I’m aware of…) is, that quartz cron has the ability to trigger per Second, while GNU/Linux cron will only trigger per Minute.
+// ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !
+// 
+// A Quartz Cron expression takes the form of six or optionally seven fields:
+// Seconds
+// Minutes
+// Hours
+// Day-of-Month
+// Month
+// Day-of-Week
+// Year (optional field)
+
+// //   C H R O N
+//
+// #  *    *    *    *    *    *    *  command to execute
+// #  ┬    ┬    ┬    ┬    ┬    ┬    ┬
+// #  │    │    │    │    │    │    │
+// #  │    │    │    │    │    │    └──── year
+// #  │    │    │    │    │    └───────── day of week (0 - 6) (0 to 6 are Sunday to Saturday)
+// #  │    │    │    │    └────────────── month (1 - 12)
+// #  │    │    │    └─────────────────── day of month (1 - 31)
+// #  │    │    └──────────────────────── hour (0 - 23)
+// #  │    └───────────────────────────── min (0 - 59)
+// #  └────────────────────────────────── sec (0 - 59)
+// 
+// http://www.cronmaker.com/;jsessionid=node01c238cs67e9e85pzk2k0mr6l630861.node0?0 // USE TO GENERATE CHRON EXPRESSIONS!!!!!!!!!
+// https://www.freeformatter.com/cron-expression-generator-quartz.html // USE TO GENERATE CHRON EXPRESSIONS!!!!!!!!!
+// 
+// Time cron "0 2 0 1 1 ? *" // // Every year on Jan 1st at 2 minutes past midnight
+
+// "0 0/5 * * * ?" //every 5 Minutes
+// "0 1 0 * * ?" //daily at 12:01 am
+// "0 1 0 1 * ?" //monthly at 01 12:01 am
+// "0 2 0 1 1 ?" //yearly at 01-01 12:02 am
+// year is optional, * is “don’t care”, ? is mandatory either on day OR weekday, ? must be set exactly once.
+// But your definition is fine, I have no idea why it shouldn’t work.
+
+Strategies {
+every30seconds : "0/30 0 0 ? * * *"
+everyMinute : "0 * * ? * *"
+every2Minutes : "0 */2 * ? * *"
+every5Minutes : "0 */5 * ? * *"
+everyHour : "0 0 * ? * *"
+everyDay : "0 0 0 * * ?" //time cron "0 0 0 * * ?"  // Fires midnight every day
+//??err everyMonth : "0 0 1 * *"// At 00:00 on day-of-month 1.
+//?? everyYear : "0 0 1 1 *"// At 00:00 on day-of-month 1 in January.
+//If no strategy is defined, everyChange will be used.
+default = everyChange
+}
+
+Items {
+
+    gPersstOnChng* :  strategy = everyChange
+    gPersstOnChngRestOnStup* : strategy = everyChange, restoreOnStartup
+    gPersstOnChngOn1minRestOnStup* : strategy = everyChange, everyMinute, restoreOnStartup
+    gPersstOnChngOn30sec* : strategy = everyChange, every30seconds
+    gPersstOnChngOn1min*: strategy = everyChange, everyMinute
+}
+
+////////////////EXAMPLE/////////////////////////////////////////
+// // FROM: https://www.smarthomeblog.net/openhab-persistence-tutorial/
+///////////////////////////////////////////////////////////////
+/////////// Strategies 
+///////////   { 
+///////////   //The value of the item is persisted every hour. 
+///////////   everyHour : "0 0 * * * ?"
+///////////   //Every day at midnight, an even is fired to store the value 
+///////////   everyDayAtMidnight : "0 0 0 * * ?"
+///////////   //Every Tuesday at 5PM...I can't really find a legitimate use for this...
+///////////   everyTuesdayAtFive : "0 0 0,17 ? * TUE *" 
+///////////   //If no strategy is defined, everyChange will be used.
+///////////   default = everyChange 
+///////////   }
+///////// 
+/////////// Items 
+///////////   {
+///////////   //Persist the value for all the members of the group gTemperatureSensors using the default strategy
+///////////   gTemperatureSensors*
+///////////   // Persist the value for all the members of the group gLivingroomLights every time they change and restore them after a restart
+///////////   gLivingroomLights* : everyChange, restoreOnStartup
+///////////   //Persist the value of the group itself
+///////////   gLivingroomLights : everyUpdate, restoreOnStartup
+///////////   //store the value of the temperature every Tuesday at 5PM...So useful...who wouldn't wanna know that?
+///////////   mqtt_outside_temperature : everyTuesdayAtFive
+///////////   }

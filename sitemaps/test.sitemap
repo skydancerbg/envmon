@@ -1,0 +1,6 @@
+sitemap test label="test" {
+
+  Frame label="test" {
+        Setpoint item=testnumber step=0.5 minValue=15 maxValue=25
+  }
+}

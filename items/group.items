@@ -1,0 +1,38 @@
+//// PERSISTENCE
+// !!! All ITEMS IN THIS GROUP WILL BE PERSISTED ON EVERY CHANGE AND ON STARTUP
+Group gPersstOnChng //: strategy = everyChange
+Group gPersstOnChngRestOnStup // strategy = everyChange, restoreOnStartup
+Group gPersstOnChngOn1minRestOnStup // : strategy = everyChange, everyMinute, restoreOnStartup
+Group gPersstOnChngOn30sec //: strategy = everyChange, every30seconds
+Group gPersstOnChngOn1min //: strategy = everyChange, everyMinute
+
+
+//// POWER
+Group:Switch:OR(ON, OFF)    gALL_POWER   "Консуматори  [%d ВКЛЮЧЕН(И)]"
+
+// // // // TEMPERATURES
+Group gTemperature_measurments
+
+Group:Number:AVG gBarn_Inside_Temperature "Средна температура помещение: [%.1f °C]"
+Group:Number:AVG gHouse_Outside_Temperature "Средна външна температура къща: [%.1f °C]"
+
+// // // // // // // / // // / / / / / / / / / / / / // / 
+// // // / 
+// // // // // ОТОПЛЕНИЕ
+// // // // // // // 
+
+Group gHeating
+Group gSetPoint
+Group gSetPoint_Command
+Group gRoom_Temperature
+
+// // LINKS TO SITEMAPS!!!!!!
+// // Template for devices ON/OFF counter group
+// Group:Switch:OR(ON, OFF)    x   "x[%d ON]"
+// Switch                      x1  (x)
+// Switch                      x2  (x)
+// Switch                      x3  (x)
+// sitemap tmp label="TMP" {
+// 	Switch item=x
+// 	Group item=x
+// }

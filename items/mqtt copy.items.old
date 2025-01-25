@@ -1,0 +1,52 @@
+Switch multisensor1_relay1              "Реле 1"                                        <switch>        { channel="mqtt:topic:localMQTTbroker:multisensor1:power1" }       
+Switch multisensor1_relay2              "Реле 2"                                        <switch>        { channel="mqtt:topic:localMQTTbroker:multisensor1:power2" }       
+Number:Temperature multisensor1_DHT22_Temperature   "ТЕМПЕРАТУРА (AM2301) [%.1f °C]"                <temperature>   (gTemperature_measurments, gBarn_Inside_Temperature, gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:multisensor1:temperature_DHT22" }
+Number multisensor1_DHT22_Humidity      "Относителна влажност (AM2301) [%.1f %%]"                   <humidity>      (gPersstOnChngOn1min) { channel="mqtt:topic:localMQTTbroker:multisensor1:humidity_DHT22" }
+Number multisensor1_DHT22_Dewpoint      "ТОЧКА НА ОРОСЯВАНЕ (AM2301) [%.1f °C]"         <dewpoint>      (gPersstOnChngOn1min) { channel="mqtt:topic:localMQTTbroker:multisensor1:dewpoint_DHT22" }
+Number:Temperature multisensor1_DS18B20_Temperature "ТЕМПЕРАТУРА НА ТЕЧНОСТ (DS18B20) [%.1f °C]"    <temperature>   (gTemperature_measurments, gBarn_Inside_Temperature, gPersstOnChngOn1min)    { channel="mqtt:topic:localMQTTbroker:multisensor1:temperature_DS18B20" }
+Number multisensor1_Illuminance         "Осветеност (BH1750) [%d lux]"                 <illuminance>    (gPersstOnChngOn1min){ channel="mqtt:topic:localMQTTbroker:multisensor1:illuminance" }
+// Number multisensor1_Illuminance         "Illuminance (BH1750) [%d lux]"                 <illuminance>    (gPersstOnChngOn1min){ channel="mqtt:topic:localMQTTbroker:multisensor1:illuminance" }
+Number multisensor1_RSSI                "WiFi - СИЛА НА СИГНАЛА [%d %%]"                <network>       { channel="mqtt:topic:localMQTTbroker:multisensor1:rssi" }
+String multisensor1_Reachable           "Устройството е Online/Offline: [%s]"           <presence>      { channel="mqtt:topic:localMQTTbroker:multisensor1:reachable" }
+
+Switch	fan	"FAN"					            <fan>			{channel="mqtt:topic:localMQTTbroker:fan_control:power"}
+Dimmer	fan_Dimmer	"FAN %RPM [%d %% RPM]"		<fan>	        {channel="mqtt:topic:localMQTTbroker:fan_control:dimmer"}
+
+Rollershutter proxy_rollershutter "Щора [%s]" { channel="mqtt:topic:localMQTTbroker:blinds_control:rsh" }
+// Rollershutter rollershutter "Rollershutter [%s]" { channel="mqtt:topic:localMQTTbroker:blinds_control:rs" }
+Number position "Позиция на щората [%d %%]" { channel="mqtt:topic:localMQTTbroker:blinds_control:pos" }
+// Number position "Rollershutter position [%s]" { channel="mqtt:topic:localMQTTbroker:blinds_control:pos" }
+// Switch power1 "power 1 [%s]" { channel="mqtt:topic:localMQTTbroker:blinds_control:power1" }
+// Switch power2 "power 2 [%s]" { channel="mqtt:topic:localMQTTbroker:blinds_control:power2" }
+
+
+///////////////// SensAir S8 CO@ sensor via ESPeasy ////////////////////////////////
+// Number senseair_s8_CO2                      "НИВО НА СО2 (SenseAir S8) [%d ppm]"                    <carbondioxide> (gPersstOnChngOn1min)                                                       { channel="mqtt:topic:localMQTTbroker:espeasy_senseair_s8:co2" }
+// Number:Temperature senseair_s8_Temperature  "ТЕМПЕРАТУРА за калибрация (SenseAir S8) [%.1f °C]"     <temperature>   (gTemperature_measurments, gBarn_Inside_Temperature, gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:espeasy_senseair_s8:temperature" }
+///////////////// SensAir S8 CO@ sensor via TASMOTA ////////////////////////////////
+//To be used when senseair_s8 is the only sensor on the NodeMCU !!!!!!!!!!!!!!!!
+// Number senseair_s8_CO2                      "НИВО НА СО2 (SenseAir S8) [%d ppm]"                    <carbondioxide> (gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:senseair_s8:co2" }
+// String senseair_s8_Reachable                "Устройството е Online/Offline: [%s]"                   <presence>                              { channel="mqtt:topic:localMQTTbroker:senseair_s8:reachable" }
+
+Number mh_z19b_CO2                      "НИВО НА СО2 (MH-Z19В) [%d ppm]"                    <carbondioxide> (gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:mh_z19b:co2" }
+String mh_z19b_Reachable                "Устройството е Online/Offline: [%s]"                   <presence>                              { channel="mqtt:topic:localMQTTbroker:mh_z19b:reachable" }
+
+// USE WHEN enseAir S8 + Sensirion SCD30 are on the same NodeMCU !!!!!!!!!!!!!!!!!!!!!!!!
+Number senseair_s8_CO2                  "НИВО НА СО2 (SenseAir S8) [%d ppm]"        <carbondioxide> (gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:senseair_s8:s8_co2" }
+String senseair_s8_Reachable            "Устройството е Online/Offline: [%s]"       <presence>                              { channel="mqtt:topic:localMQTTbroker:senseair_s8:reachable" }
+
+
+Number scd30_CO2                        "НИВО НА СО2 (SCD30) [%d ppm]"              <carbondioxide> (gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:senseair_s8:scd30_co2" }
+Number:Temperature scd30_Temperature    "ТЕМПЕРАТУРА (SCD30) [%.1f °C]"             <temperature>   (gTemperature_measurments, gBarn_Inside_Temperature, gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:senseair_s8:scd30_temperature" }
+Number scd30_Humidity                   "Относителна влажност (SCD30) [%.1f %%]"    <humidity>      (gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:senseair_s8:scd30_humidity" }
+Number scd30_Dewpoint                   "ТОЧКА НА ОРОСЯВАНЕ (SCD30) [%.1f °C]"      <dewpoint>      (gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:senseair_s8:scd30_dewpoint" }
+Number scd30_eCO2                       "eCO2 (SCD30) [%d ppm]"                     <carbondioxide> (gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:senseair_s8:scd30_eco2" }
+
+// // this is to be used when scd30 sensor in on seperate NodeMCU (ot together with SenseAir S8)!!!!!!!!!!!!!!!!!!!!!!!!
+// Number scd30_CO2                        "НИВО НА СО2 (SCD30) [%d ppm]"              <carbondioxide> (gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:scd30:co2" }
+// Number:Temperature scd30_Temperature    "ТЕМПЕРАТУРА (SCD30) [%.1f °C]"             <temperature>   (gTemperature_measurments, gBarn_Inside_Temperature, gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:scd30:temperature" }
+// Number scd30_Humidity                   "Относителна влажност (SCD30) [%.1f %%]"    <humidity>      (gPersstOnChngOn1min) { channel="mqtt:topic:localMQTTbroker:scd30:humidity" }
+// Number scd30_Dewpoint                   "ТОЧКА НА ОРОСЯВАНЕ (SCD30) [%.1f °C]"      <dewpoint>      (gPersstOnChngOn1min) { channel="mqtt:topic:localMQTTbroker:scd30:dewpoint" }
+// Number scd30_eCO2                       "eCO2 (SCD30) [%d ppm]"                    <carbondioxide> (gPersstOnChngOn1min) { channel="mqtt:topic:localMQTTbroker:scd30:eco2" }
+// String scd30_Reachable                  "Устройството е Online/Offline: [%s]"       <presence>                            { channel="mqtt:topic:localMQTTbroker:scd30:reachable" }
+

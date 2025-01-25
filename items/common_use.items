@@ -1,0 +1,11 @@
+//https://community.openhab.org/t/solved-how-to-insert-an-empty-field-in-sitemap/48546/2
+String none "" <none>
+
+String systems_OK "ВСИЧКИ СИСТЕМИ РАБОТЯТ БЕЗПРОБЛЕМНО" <checked_tick_circle_green>
+String systems_OK_en "All SYSTEMS ARE OPERATIONAL!" <checked_tick_circle_green>
+String systems_WARNING_yellow "ВНИМАНИЕ! ПРОБЛЕМ В СИСТЕМА" <warning_triangle_yellow>
+String systems_WARNING_red "СИТЕМА НЕ ФУНКЦИОНИРА" <warning_triangle_red>
+
+Number testnumber
+
+

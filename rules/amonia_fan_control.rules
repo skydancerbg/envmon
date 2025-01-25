@@ -1,0 +1,52 @@
+rule "auto_ventilation_onoff_virtual set to OFF"
+
+when
+	Item auto_ventilation_onoff_virtual received command OFF
+	// Item auto_ventilation_onoff_virtual changed
+then
+   
+        logInfo("auto_ventilation_onoff_virtual", "STATE CHANGED, SENDING COMMAND ON")
+
+      
+		if(sonoffpow_Power.state == OFF || sonoffpow_Power.state == UNDEF) {
+                     logInfo("amonia_auto_to_manual", "sonoffpow komanda ON")
+            sonoffpow_Power.sendCommand(ON)
+        }
+end
+
+// Script execution of rule with UID 'amonia_fan_control-2' failed: Could not cast NULL to java.lang.Number; line 32, column 46, length 37 in amonia_fan_control
+
+// Amonia fan control:
+rule "Update Amonia ventilation control"
+
+when
+	Item amonia_level_setpoint received update or 
+	Item sensorNH3_amonia received update or 
+    Item auto_ventilation_onoff_virtual changed
+then
+            
+            // logInfo("heating_current_temp", GF_Sonoff_TH16_6_Temperature.state.toString)
+            // logInfo("heating_temp_minus_1", ((GF_OF_Heating_Setpoint.state as Number)-1.0).toString)
+            // logInfo("heating_setpoint_temp", GF_OF_Heating_Setpoint.state.toString)
+
+    if(((sensorNH3_amonia.state as Number)< (amonia_level_setpoint.state as Number)-0.5) && auto_ventilation_onoff_virtual.state == ON) {
+        logInfo("NH3_level_lower_than_setpoint", sensorNH3_amonia.state.toString)
+        logInfo("NH3_level_setpoint_value", amonia_level_setpoint.state.toString)
+		
+        if(sonoffpow_Power.state == ON || sonoffpow_Power.state == UNDEF) {
+            logInfo("fan relay", "komanda pow OFF")
+            sonoffpow_Power.sendCommand(OFF)
+        }
+	}else if (((sensorNH3_amonia.state as Number) >= (amonia_level_setpoint.state as Number)) || auto_ventilation_onoff_virtual.state == ON)
+    {
+        logInfo("NH3_level_higher_than_setpoint", "temperaturata e po-goliama")
+        logInfo("NH3_level_setpoint_value", amonia_level_setpoint.state.toString)
+		
+         if(sonoffpow_Power.state == OFF || sonoffpow_Power.state == UNDEF) {
+            logInfo("fan relay", "komanda pow ON")
+            sonoffpow_Power.sendCommand(ON)
+        }
+      
+    }
+
+end

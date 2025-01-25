@@ -1,0 +1,242 @@
+
+// LINK TO THIS PAGE:
+// http://10.10.10.100:38080/basicui/app?sitemap=control
+
+sitemap control label="Управление на Кибер Физичната Система (КФС)" {
+
+        Frame  {
+            Text item=DateTimeBG24hFormat 
+            Text item=systems_OK 
+            // Text item=systems_WARNING_yellow
+            // Text item=systems_WARNING_red 
+            // Text item=none
+            Text item=Sunrise_Time
+            Text item=Sunset_Time
+
+            Text item=sesnsorTHL_Temperature   label="ОКОЛНА [%.1f °C]" icon="temperature_outside"       
+
+            // Text item=Alarm_Arm_Disarm_Switch label="АЛАРМЕНА СИСТЕМА:" icon="unsecured_shield" visibility=[Alarm_Arm_Disarm_Switch==0] //mappings=[OFF="ДЕАКТИВИРАНА"]   
+            // Text item=Alarm_Arm_Disarm_Switch label="АЛАРМЕНА СИСТЕМА:" icon="secured_shield" visibility=[Alarm_Arm_Disarm_Switch==1] //mappings=[ON="АКТИВИРАНА"]   
+
+            Group item=gBarn_Inside_Temperature label="Средна температура в помещението [%.1f °C]" icon="temperature"
+            
+            Group item=Gr_HR_ACTIVE_POWER icon="electric_meter"
+            //Sumulated with DS18B20 sensor
+            Text item=multisensor1_DHT22_Temperature label="БОЙЛЕР [%.1f °C]" icon="water_heater_tank" 
+
+            Switch item=GF_HR_Relay_Ctrl_hw_recirculation_pump icon="circulation_pump" label="ПОМПА РЕЦИРКУЛАЦЯ БГВ" mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+       
+
+            Switch item=GF_HR_solar_pump_On_Off icon="solar_panel_house" label="СОЛАР" mappings=[ON="РАБОТИ"]  visibility=[GF_HR_solar_pump_On_Off==ON]
+            Switch item=GF_HR_solar_pump_On_Off icon="solar_energy_off_blue" label="СОЛАР" mappings=[OFF="ИЗКЛЮЧЕН"] visibility=[GF_HR_solar_pump_On_Off==OFF]
+
+            Text item=HVAC_HeatingCooling_Switch label="КЛИМАТИЗАЦИЯ:" icon="off_button"    visibility=[HVAC_HeatingCooling_Switch==0.0]    
+            Text item=HVAC_HeatingCooling_Switch label="КЛИМАТИЗАЦИЯ:" icon="air_conditioning_symbol"  visibility=[HVAC_HeatingCooling_Switch==1.0]    
+
+            Switch item=GF_HR_hp_On_Off icon="air_conditioner_heating" label="ТЕРМОПОМПА" mappings=[ON="РАБОТИ"]  visibility=[GF_HR_hp_On_Off==ON]
+            Switch item=GF_HR_hp_On_Off icon="air_conditioner_off_grey" label="ТЕРМОПОМПА" mappings=[OFF="В ГОТОВНОСТ"] visibility=[GF_HR_hp_On_Off==OFF]
+
+            Switch item=GF_HR_well_pump_On_Off icon="water_pump" label="СОНДАЖНА ПОМПА" mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+
+            Text  item=Gr_UF_ALL_ACTUATORS icon="heatingvalve"  label="ЗАДВИЖКИ ПОДОВО"
+
+            Switch item=GF_HR_Relay_Ctrl_hp_circ_pump icon="circulation_pump" label="ПОМПА ЦИРКУЛАЦИЯ ПОДОВО" mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            Switch item=GF_HR_Relay_Ctrl_hw_hp_superheater_pump icon="circulation_pump" label="ПОМПА ДЕСУПЕРХИИТЪР" mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            Switch item=multisensor1_relay1  label="Rele1" mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+
+        }    
+
+        Frame label="ОТОПЛЕНИЕ/ОХЛАЖДАНЕ" icon="radiator" {
+            // UNCOMMENT TO INITIALLY SET THE SWITCH POSITION !!!
+            // Switch item=virtual_HeatingCooling_Switch icon="off_button"  mappings=[0.0="ИЗКЛЮЧЕНО",1.0="ОТОПЛЕНИЕ",2.0="ОХЛАЖДАНЕ"]   
+            Switch item=virtual_HeatingCooling_Switch icon="air_conditioning_symbol"    visibility=[virtual_HeatingCooling_Switch==0.0] mappings=[0.0="ИЗКЛЮЧЕНО",1.0="ОТОПЛЕНИЕ",2.0="ОХЛАЖДАНЕ"]   
+            Switch item=virtual_HeatingCooling_Switch icon="mode_heating"  visibility=[virtual_HeatingCooling_Switch==1.0] mappings=[0.0="ИЗКЛЮЧЕНО",1.0="ОТОПЛЕНИЕ",2.0="ОХЛАЖДАНЕ"]   
+            Switch item=virtual_HeatingCooling_Switch icon="mode_cooling"  visibility=[virtual_HeatingCooling_Switch==2.0] mappings=[0.0="ИЗКЛЮЧЕНО",1.0="ОТОПЛЕНИЕ",2.0="ОХЛАЖДАНЕ"]  
+
+            Text        item=gBarn_Inside_Temperature label="Измерена средна температура [%.1f °C]" icon="temperature"
+            Setpoint    item=virtual_Thermostat_Setpoint label="Желана температура [%.1f °C]" icon="temperature" minValue=1.0 maxValue=30.0 step=0.5
+            Setpoint    item=virtual_Thermostat_Delta_Temp label="Температурна делта [%.1f °C]" icon="temperature" minValue=0 maxValue=1 step=0.1
+            Switch      item=virtual_Heating_OnOff_Visualizer  label="Отоплителна система" icon="radiator"  mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+            Switch      item=virtual_Heating_OnOff_Visualizer  label="Охладителна система" icon="fan"  mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+
+            // Text label="УПРАВЛЕНИЕ НА КЛИМАТИЗАЦИЯТА:" icon="radiator" {
+            //         // Switch item=Heating_ON_OFF label="КЪЩА: КОНТРОЛЕР термостати (ВКЛ./ИЗКЛ.)"
+            //         // https://community.openhab.org/t/solved-how-to-insert-an-empty-field-in-sitemap/48546/2
+
+            //         Text item=none
+            //         Frame label="КЛИМАТИЗАЦИЯ ПОМЕЩЕНИЕ" {
+            //             Switch      item=virtual_Heating_Enable label="ВКЛ./ИЗКЛ. ОТОПЛЕНИЕ"  
+            //     }
+            // } 
+        }  
+
+            
+    Frame label="ОСВЕТЛЕНИЕ:" icon="light" {    
+        Switch item=Gr_ALL_LIGHTS icon="light" label="ОСВЕТЛЕНИЕ (ВСИЧКИ)"
+        Group item=Gr_ALL_LIGHTS
+    }
+
+        Frame label="РОЗЕТКИ, КОНТАКТИ И РАЗКЛОНИТЕЛИ:" icon="groundfloor" {    
+            Switch item=Gr_ALL_POWER icon="poweroutlet" label="КОНСУМАТОРИ (ВСИЧКИ)"
+            Group item=Gr_ALL_POWER
+        }
+
+    Frame label="СОЛАР:" {
+            Text item=GF_HR_SENSORS_TEMP_outside_roof       
+            Text item=GF_HR_SENSORS_TEMP_hw_tank_top        
+            Text item=GF_HR_SENSORS_TEMP_hw_tank_middle     
+            Text item=GF_HR_SENSORS_TEMP_hw_tank_botom              
+            Text item=GF_HR_SENSORS_TEMP_solar_col          
+            Text item=GF_HR_SENSORS_TEMP_solar_from_col     
+            Text item=GF_HR_SENSORS_TEMP_solar_to_col       
+                    }         
+
+    Frame label="ТЕРМОПОМПА СТАТИСТИКА:" {
+            Text item=DB_RUNTIME_TODAY_Heat_pump
+            Text item=DB_RUNTIME_TODAY_PERCENTAGE_OF_ON_TIME_Heat_pump
+            Text item=DB_RUNTIME_LAST_RUN_Heat_pump
+            Text item=DB_RUNTIME_DAILY_Heat_pump
+            Text item=DB_RUNTIME_TOTAL_Heat_pump
+            Text item=DB_RUNTIME_DAILY_TOTAL_Heat_pump
+                    }         
+
+        Frame label="ПОКАЗАНИЯ ЕЛЕКТРОМЕРИ В 00:00:45 ЧАСА:" {
+            Text item=DB_kWh_TO_DATE_SUM_hvac_and_hot_water         label="ОБЩО ОВИ И ТОПЛА ВОДА [%.2f kWh]"        
+            Text item=DB_kWh_TO_DATE_SUM_solar_hw_and_heater  label="ОБЩО СОЛАР И ТОПЛА ВОДА [%.2f kWh]" 
+            Text item=DB_kWh_TO_DATE_SUM_heat_pump_and_well_pump    label="ОБЩО ТЕРМОПОМПА И СОНДАЖНА ПОМПА [%.2f kWh]" 
+            Text item=none
+            Text item=DB_kWh_TO_DATE_heat_pump              label="ТЕРМОПОМПА [%.2f kWh]"           
+            Text item=DB_kWh_TO_DATE_well_pump              label="СОНДАЖНА ПОМПА [%.2f kWh]"          
+            Text item=DB_kWh_TO_DATE_soalar_and_hw_recirc   label="СОЛАР И РЕЦИРКУЛАЦИЯ НА БГВ [%.2f kWh]"
+            Text item=DB_kWh_TO_DATE_water_heater           label="ЕЛ. НАГРЕВАТЕЛ БОЙЛЕР [%.2f kWh]"        
+            Text item=DB_kWh_TO_DATE_recuperator            label="РЕКУПЕРАТОР [%.2f kWh]"     
+        } 
+
+        Frame label="ДНЕВНА КОНСУМАЦИЯ НА ЕЛ. ЕНЕРГИЯ ЗА ПРЕДИШНИЯ ДЕН:" {
+            Text item=DB_kWh_DAILY_SUM_hvac_and_hot_water           label="ОБЩО ОВИ И ТОПЛА ВОДА [%.2f kWh]"        
+            Text item=DB_kWh_DAILY_SUM_solar_hw_and_heater          label="ОБЩО СОЛАР И ТОПЛА ВОДА [%.2f kWh]" 
+            Text item=DB_kWh_DAILY_SUM_heat_pump_and_well_pump      label="ОБЩО ТЕРМОПОМПА И СОНДАЖНА ПОМПА [%.2f kWh]" 
+            Text item=none
+            Text item=DB_kWh_DAILY_heat_pump                        label="ТЕРМОПОМПА [%.2f kWh]"           
+            Text item=DB_kWh_DAILY_well_pump                        label="СОНДАЖНА ПОМПА [%.2f kWh]"          
+            Text item=DB_kWh_DAILY_soalar_and_hw_recirc             label="СОЛАР И РЕЦИРКУЛАЦИЯ НА БГВ [%.2f kWh]"
+            Text item=DB_kWh_DAILY_water_heater                     label="ЕЛ. НАГРЕВАТЕЛ БОЙЛЕР [%.2f kWh]"        
+            Text item=DB_kWh_DAILY_recuperator                      label="РЕКУПЕРАТОР [%.2f kWh]"     
+        } 
+
+
+        Frame label="ЗАДВИЖКИ ПОДОВО ОТОПЛЕНИЕ:" icon="groundfloor" {    
+            Switch  item=Gr_UF_ALL_ACTUATORS icon="presence"  label="ВСИЧКИ ЗАДВИЖКИ"
+            Group   item=Gr_UF_ALL_ACTUATORS
+            Switch  item=Gr_UF_FF_ACTUATORS icon="groundfloor" label="ЗАДВИЖКИ ЕТАЖ 1 И ГАРАЖ -10/(12)"
+            Group   item=Gr_UF_FF_ACTUATORS
+            Switch  item=Gr_UF_SF_ACTUATORS icon="firstfloor" label="ЗАДВИЖКИ ЕТАЖ 2 И 3 -9/(11)"
+            Group   item=Gr_UF_SF_ACTUATORS
+        }
+
+
+        Frame label="ТЕМПЕРАТУРИ:" icon="temperature" {
+                Group item=Gr_House_Outside_Temperature label="ВЪНШНА (средно измерена) [%.1f °C]" icon="temperature"
+                Group item=Gr_House_Inside_Temperature label="ВЪТРЕШНА (средно измерена) [%.1f °C]" icon="temperature"
+        }
+
+
+        Frame label="СТАТУС ТЕРМОПОМПА И ПОМПИ:" icon="switch" {
+                Switch item=GF_HR_hp_On_Off icon="switch" label="ТЕРМОПОМПА" mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+                Switch item=GF_HR_well_pump_On_Off icon="water_pump" label="СОНДАЖНА ПОМПА" mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+                Switch item=GF_HR_Relay_Ctrl_hp_circ_pump icon="circulation_pump" label="ЦИРКУЛАЦИЯ ТЕРМОПОМПА  ПОМПА" mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+                Switch item=GF_HR_Relay_Ctrl_hw_hp_superheater_pump icon="circulation_pump" label="ДЕСУПЕРХИИТЪР ПОМПА" mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+                Switch item=GF_HR_solar_pump_On_Off icon="circulation_pump" label="СОЛАР ПОМПА" mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+                Switch item=GF_HR_Relay_Ctrl_hw_recirculation_pump icon="circulation_pump" label="РЕЦИРКУЛАЦЯ БГВ ПОМПА" mappings=[ON="ВКЛ.", OFF="ИЗКЛ."]
+        }
+
+
+        Frame label="ПОКАЗАНИЯ НА ЕЛЕКТРОМЕРИТЕ:" icon="electric_meter" {    
+            Group item=Gr_HR_ACTIVE_POWER icon="electric_meter"
+            Group item=Gr_HR_Total_KWh icon="electric_meter"
+        }
+
+           
+        Frame label="УПРАВЛЕНИЕ ПОМПИ И НАГРЕВАТЕЛ:" icon="water_heater" {    
+            Switch  item=GF_HR_Relay_Ctrl_Power30 icon="radiator"  label="КОНТАКТОР ТЕРМОПОМПА"
+            Switch  item=GF_HR_Relay_Ctrl_hp_circ_pump icon="circulation_pump"  label="РЕЛЕ ПОМПА ЦИРКУЛАЦИЯ ТЕРМОПОМПА"
+            Switch  item=GF_HR_Relay_Ctrl_hw_electric_heater icon="water_heater"  label="РЕЛЕ ЕЛ. НАГРЕВАТЕЛ БОЙЛЕР"
+            Switch  item=GF_HR_Relay_Ctrl_hw_recirculation_pump icon="circulation_pump" label="РЕЛЕ ПОМПА РЕЦИРКУЛАЦИЯ БГВ"
+            Switch  item=GF_HR_Relay_Ctrl_hw_hp_superheater_pump icon="circulation_pump" label="РЕЛЕ ПОМПА ДЕСУПЕРХИИТЪР"
+            Switch  item=GF_HR_Relay_Ctrl_solar_3way_sw icon="3way_valve" label="РЕЛЕ ТРИПЪТНА ЗАДВИЖКА СОЛАР" 
+        }
+
+        Frame label="ОТОПЛЕНИЕ/ОХЛАЖДАНЕ ДУХАЛКИ ОФИС И ТЕСТ ВСИЧКИ ЗАДВИЖКИ" icon="radiator" {
+            // UNCOMMENT TO INITIALLY SET THE SWITCH POSITION !!!
+            // Switch item=HeatingCoolingSwitch icon="off_button"  mappings=[0.0="ИЗКЛЮЧЕНО",1.0="ОТОПЛЕНИЕ",2.0="ОХЛАЖДАНЕ"]   
+            Switch item=HeatingCoolingSwitch icon="off_button" visibility=[HeatingCoolingSwitch==0.0] mappings=[0.0="ИЗКЛЮЧЕНО",1.0="ОТОПЛЕНИЕ",2.0="ОХЛАЖДАНЕ"]   
+            Switch item=HeatingCoolingSwitch icon="mode_heating" visibility=[HeatingCoolingSwitch==1.0] mappings=[0.0="ИЗКЛЮЧЕНО",1.0="ОТОПЛЕНИЕ",2.0="ОХЛАЖДАНЕ"]   
+            Switch item=HeatingCoolingSwitch icon="mode_cooling" visibility=[HeatingCoolingSwitch==2.0] mappings=[0.0="ИЗКЛЮЧЕНО",1.0="ОТОПЛЕНИЕ",2.0="ОХЛАЖДАНЕ"]  
+            // Switch item=HeatingCoolingSwitch mappings=[0="OFF",1="HEATING",2="COOLING"]
+   
+            Text label="УПРАВЛЕНИЕ НА ОТОПЛЕНИЕТО:" icon="radiator" {
+                    // Switch item=Heating_ON_OFF label="КЪЩА: КОНТРОЛЕР термостати (ВКЛ./ИЗКЛ.)"
+                    // https://community.openhab.org/t/solved-how-to-insert-an-empty-field-in-sitemap/48546/2
+                    Text item=none
+                    Frame label="ОТОПЛЕНИЕ ДОМАШЕН ОФИС" {
+                        Switch item=GF_OF_Heating_Enable label="ВКЛ./ИЗКЛ. ОТОПЛЕНИЕ НА ДОМАШЕН ОФИС"  
+                        Setpoint item=GF_OF_Heating_Setpoint label="Желана температура [%.1f °C]" icon="temperature" minValue=1 maxValue=30 step=0.5
+                        Text item=GF_OF_Temperature label="Измерена температура [%.1f °C]" icon="temperature"
+                        Switch item=GF_OF_Heating  label="Отоплителни уреди (ВКЛ./ИЗКЛ.)" icon="radiator" 
+                }
+                    Text item=none
+                    Frame label="ПОДОВО ОТОПЛЕНИЕ НА КЪЩАТА - ТЕСТ" {
+                        Switch      item=HOUSE_UF_All_Heating_Enable label="ВКЛ./ИЗКЛ. ПОДОВО ОТОПЛЕНИЕ НА КЪЩАТА - ТЕСТ"  
+                        Setpoint    item=HOUSE_UF_All_Heating_Setpoint label="Желана температура [%.1f °C]" icon="temperature" minValue=1 maxValue=30 step=0.5
+                        Text        item=Gr_HS_AVERAGE_HEATING_COOLING_Temperature label="Измерена температура [%.1f °C]" icon="temperature"
+                        Switch      item=HOUSE_UF_All_Heating  label="Отоплителни уреди (ВКЛ./ИЗКЛ.)" icon="radiator" 
+                }
+            } 
+        }
+
+
+
+
+    Frame label="Electric meter Hot Water Heater 515 - ID:103" {
+        Text item=Date label="Livingroom"
+        Text item=DateDiffFormat label="Livingroo"
+        Text item=Meter_Power_water_heater label="103 Power Watts"
+        Text item=Meter_Voltage_water_heater label="VOLTAGE"
+        Text item=Meter_Ampers_water_heater label="Ampers"
+        Text item=Meter_Hz_water_heater label="Line frequency Hz"
+        Text item=Meter_Reactive_power_water_heater label="Reactive_power"
+        Text item=Meter_Apparent_power_water_heater label="Apparent_power"
+        Text item=Meter_Power_factor_water_heater label="Power_factor"
+        Text item=Meter_TotalKWh_water_heater label="TotalKWh"
+
+        Text item=TotalCostWaterHeater label="Total cost in Lev"
+        
+        Text item=Meter_TotalKWhT1_water_heater label="TotalKWh T1"
+        Text item=Meter_TotalKWhT2_water_heater label="TotalKWh T2"
+        Text item=Meter_TotalKWhT3_water_heater label="TotalKWh T3"
+        Text item=Meter_TotalKWhT4_water_heater label="TotalKWh T4"
+        Text item=Meter_Totalkvarh_water_heater label="Totalkvarh"
+        Text item=Meter_TotalkvarhT1_water_heater label="Totalkvarh T1"
+        Text item=Meter_TotalkvarhT2_water_heater label="Totalkvarh T2"
+        Text item=Meter_TotalkvarhT3_water_heater label="Totalkvarh T3"
+        Text item=Meter_TotalkvarhT4_water_heater label="Totalkvarh T4"
+
+    }
+
+
+
+        Frame label="ПОКАЗАНИЯ ЕЛЕКТРОМЕРИ В 00:00:45 ЧАСА:" {
+            Text item=DB_kWh_TO_DATE_SUM_hvac_and_hot_water         label="ОБЩО ОВИ И ТОПЛА ВОДА kWh [%.2f]"        
+            Text item=DB_kWh_TO_DATE_SUM_solar_hw_and_heater  label="ОБЩО СОЛАР И ТОПЛА ВОДА kWh [%.2f]" 
+            Text item=DB_kWh_TO_DATE_SUM_heat_pump_and_well_pump    label="ОБЩО ТЕРМОПОМПА И СОНДАЖНА ПОМПА kWh [%.2f]" 
+            Text item=none
+            Text item=DB_kWh_TO_DATE_heat_pump              label="ТЕРМОПОМПА kWh [%.2f]"           
+            Text item=DB_kWh_TO_DATE_well_pump              label="СОНДАЖНА ПОМПА kWh [%.2f]"          
+            Text item=DB_kWh_TO_DATE_soalar_and_hw_recirc   label="СОЛАР И РЕЦИРКУЛАЦИЯ НА БГВ kWh [%.2f]"
+            Text item=DB_kWh_TO_DATE_water_heater           label="ЕЛ. НАГРЕВАТЕЛ БОЙЛЕР kWh [%.2f]"        
+            Text item=DB_kWh_TO_DATE_recuperator            label="РЕКУПЕРАТОР kWh [%.2f]"     
+        } 
+
+
+
+}

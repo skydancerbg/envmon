@@ -1,0 +1,11 @@
+
+DateTime         Sunrise_Time       "[Слъцето ще изгрее в %1$tH:%1$tM часа]"      <sun>        { channel="astro:sun:home:rise#start" }
+DateTime         Sunset_Time        "[Слънцето ще залезе в %1$tH:%1$tM часа]"       <moon>       { channel="astro:sun:home:set#start" }
+DateTime         Sunrise_Time_en    "[The SUN will rise at %1$tH:%1$tM o'clock]"      <sun>        { channel="astro:sun:home:rise#start" }
+DateTime         Sunset_Time_en     "[The SUN will set at %1$tH:%1$tM o'clock]"       <moon>       { channel="astro:sun:home:set#start" }
+Number:Angle     Azimuth            "Azimuth"                                 { channel="astro:sun:home:position#azimuth" }
+Number:Angle     Elevation          "Elevation"                               { channel="astro:sun:home:position#elevation" }
+String           MoonPhase          "MoonPhase"                               { channel="astro:moon:home:phase#name" }
+Number:Length    MoonDistance       "MoonDistance [%.1f %unit%]"              { channel="astro:moon:home:distance#distance" }
+Number:Intensity Total_Radiation    "Radiation [%.2f %unit%]"                 { channel="astro:sun:home:radiation#total" }
+Number:Intensity Diffuse_Radiation  "Diffuse Radiation [%.2f %unit%]"         { channel="astro:sun:home:radiation#diffuse" }

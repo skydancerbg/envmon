@@ -1,0 +1,8 @@
+
+// To be used with a rule to set it based on energy meter power consumption value
+Switch GF_HR_hp_On_Off      "ТЕРМОПОМПА ВКЛ./ИЗКЛ."    <switch>     (Gr_Persist_On_Change_1minute_Startup)
+// To be used with a rule to set it based on energy meter power consumption value
+Switch GF_HR_well_pump_On_Off      "СОНДАЖНА ОПОМПА ВКЛ./ИЗКЛ."    <switch>     (Gr_Persist_On_Change_1minute_Startup)
+// To be used with a rule to set it based on energy meter power consumption value
+Switch GF_HR_solar_pump_On_Off      "ПОМПА СОЛАР ВКЛ./ИЗКЛ."    <switch>     (Gr_Persist_On_Change_1minute_Startup)
+

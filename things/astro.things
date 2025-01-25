@@ -1,0 +1,4 @@
+// Block 2, 1113 БАН IV км., Sofia (IICT BAN) location 42°40'35.7"N 23°22'06.6"E Elevation:557 m 
+// Decimal style approximate location: 42.67659, 23.36849 
+astro:sun:home  [ geolocation="42.67659, 23.36849,557", interval=60 ]
+astro:moon:home [ geolocation="42.67659, 23.36849,557", interval=60 ]

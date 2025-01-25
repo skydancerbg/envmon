@@ -1,0 +1,63 @@
+
+//  !!!!    3 POSITION HEATING/COOLING/OFF SWITCH !!!!!!!!!!!
+
+// USED FOR ELECTRIC HEATING OF THE OFFICE - REMOVE AFTER USE!!!!!!!!!!!!!!!!!
+
+// https://community.openhab.org/t/multi-state-switches/10939/6
+Number virtual_HeatingCooling_Switch "[MAP(heatingcooling_states.map):%s]" (gPersstOnChngRestOnStup)
+// Number HeatingCoolingSwitch "СЪСТОЯНИЕ: [MAP(heatingcooling_states.map):%s]"
+// 0=OFF
+// 0.0=OFF
+// 1=HEATING
+// 1.0=HEATING
+// 2=COOLING
+// 2.0=COOLING
+// - = -
+
+// // // // //  // // // // // // // // 
+Number virtual_Thermostat_Delta_Temp (gPersstOnChngRestOnStup)
+
+//  
+Switch virtual_Heating_Enable "Отопление помещение" (gPersstOnChngRestOnStup) [ "Switchable" ]
+Group:Number:AVG gBarn_Inside_Temperature "Средна температура помещение: [%.1f °C]" 
+Number virtual_Thermostat_Setpoint (gPersstOnChngRestOnStup)
+// Group:Switch:OR(ON, OFF)  HVAC_UF_Room_ACTUATORS_1   "ЗАДВИЖКИ ХОЛ [%d ВКЛЮЧЕНИ]" <heatingvalve>
+Switch virtual_Heating_OnOff_Visualizer  
+
+
+
+// // // // // WHOLE HOUSE UNDERFLOOR HEATING TEST // // // // // // // // 
+
+// Group Gr_HS_UF_ALL // Home Office
+
+// Group:Number:AVG Gr_HS_AVERAGE_HEATING_COOLING_Temperature "Home Office Average Temperature [%.1f C]" <temperature> (Group_Room_Temperature)
+// Group:Switch:OR(ON, OFF)  Gr_UF_ALL_ACTUATORS  "ВСИЧКИ  [%d ВКЛЮЧЕНИ]" <heatingvalve>
+// Group:Switch:OR(ON, OFF)  Gr_UF_FF_ACTUATORS   "ЕТАЖ 1 И ГАРАЖ [%d ВКЛЮЧЕНИ]" <heatingvalve>
+// Group:Switch:OR(ON, OFF)  Gr_UF_SF_ACTUATORS   "ЕТАЖ 2 И 3 [%d ВКЛЮЧЕНИ]" <heatingvalve>
+
+// Switch HOUSE_UF_All_Heating_Enable "Under floor heating all" (Gr_Persist_On_Change_Startup) [ "Switchable" ] 
+// Number HOUSE_UF_All_Heating_Setpoint (Gr_Persist_On_Change_Startup) //,Group_SetPoint,Group_SetPoint_Command,Group_Home_Office)
+// Switch HOUSE_UF_All_Heating 
+
+// // // // // HOME OFFICE HEATING/COOLING // // // // // // // // 
+
+// Group Gr_GF_OF // Home Office
+// Group:Number:AVG GF_OF_Temperature "Home Office Average Temperature [%.1f C]" <temperature> (Group_Room_Temperature)
+
+// Switch GF_OF_Heating_Enable "Home office heating" (Gr_Persist_On_Change_Startup) [ "Switchable" ] 
+// Number GF_OF_Heating_Setpoint (Gr_Persist_On_Change_Startup) //,Group_SetPoint,Group_SetPoint_Command,Group_Home_Office)
+// Switch GF_OF_Heating 
+
+// // !!!!!!!!!!!
+// Make switch with 1 and 0 states in order to chart the switch in Grafana
+// Switch GF_Sonoff_TH16_2_Grafana_0_1_Power  (GF_Sonoff_TH16_2, gAllPower)      // ???? Dont need this - REMOVE
+
+
+// // // // APARTMENT KITCEHN DINING // // // // 
+
+
+// Number AT_KN_Heating_Setpoint (Group_SetPoint,Group_SetPoint_Command,Group_AT_KN)
+// Switch AT_KN_Heating_Status
+// Switch AT_KN_Heating_Enable
+
+

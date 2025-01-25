@@ -1,0 +1,100 @@
+Switch multisensor1_relay1              "Реле 1"                                        <switch>        { channel="mqtt:topic:localMQTTbroker:multisensor1:power1" }       
+Switch multisensor1_relay2              "Реле 2"                                        <switch>        { channel="mqtt:topic:localMQTTbroker:multisensor1:power2" }       
+Number:Temperature multisensor1_DHT22_Temperature   "ТЕМПЕРАТУРА (AM2301) [%.1f °C]"                <temperature>   (gTemperature_measurments, gBarn_Inside_Temperature, gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:multisensor1:temperature_DHT22" }
+Number multisensor1_DHT22_Humidity      "Относителна влажност (AM2301) [%.1f %%]"                   <humidity>      (gPersstOnChngOn1min) { channel="mqtt:topic:localMQTTbroker:multisensor1:humidity_DHT22" }
+Number multisensor1_DHT22_Dewpoint      "ТОЧКА НА ОРОСЯВАНЕ (AM2301) [%.1f °C]"         <dewpoint>      (gPersstOnChngOn1min) { channel="mqtt:topic:localMQTTbroker:multisensor1:dewpoint_DHT22" }
+Number:Temperature multisensor1_DS18B20_Temperature "ТЕМПЕРАТУРА НА ТЕЧНОСТ (DS18B20) [%.1f °C]"    <temperature>   (gTemperature_measurments, gBarn_Inside_Temperature, gPersstOnChngOn1min)    { channel="mqtt:topic:localMQTTbroker:multisensor1:temperature_DS18B20" }
+Number multisensor1_Illuminance         "Осветеност (BH1750) [%d lux]"                 <illuminance>    (gPersstOnChngOn1min){ channel="mqtt:topic:localMQTTbroker:multisensor1:illuminance" }
+// Number multisensor1_Illuminance         "Illuminance (BH1750) [%d lux]"                 <illuminance>    (gPersstOnChngOn1min){ channel="mqtt:topic:localMQTTbroker:multisensor1:illuminance" }
+Number:Temperature bme280_Temperature    "ТЕМПЕРАТУРА (BME280) [%.1f °C]"                <temperature>   (gTemperature_measurments, gPersstOnChngOn1min)  { channel="mqtt:topic:localMQTTbroker:multisensor1:temperature_bme280" }
+Number bme280_Humidity                   "Относителна влажност (BME280) [%.1f %%]"       <humidity>      (gPersstOnChngOn1min)                            { channel="mqtt:topic:localMQTTbroker:multisensor1:humidity_bme280" }
+Number bme280_Dewpoint                   "ТОЧКА НА ОРОСЯВАНЕ (BME280) [%.1f °C]"         <dewpoint>      (gPersstOnChngOn1min)                            { channel="mqtt:topic:localMQTTbroker:multisensor1:dewpoint_bme280" }
+Number bme280_Pressure                   "АТМОСФЕРНО НАЛЯГАНЕ (BME280) [%.1f hPa]"         <dewpoint>     (gPersstOnChngOn1min)                           { channel="mqtt:topic:localMQTTbroker:multisensor1:presure_bme280" }
+Number multisensor1_RSSI                "WiFi - СИЛА НА СИГНАЛА [%d %%]"                <network>       { channel="mqtt:topic:localMQTTbroker:multisensor1:rssi" }
+String multisensor1_Reachable           "Устройството е Online/Offline: [%s]"           <presence>      { channel="mqtt:topic:localMQTTbroker:multisensor1:reachable" }
+
+Switch	fan	"FAN"					            <fan>			{channel="mqtt:topic:localMQTTbroker:fan_control:power"}
+Dimmer	fan_Dimmer	"FAN %RPM [%d %% RPM]"		<fan>	        {channel="mqtt:topic:localMQTTbroker:fan_control:dimmer"}
+
+Rollershutter proxy_rollershutter "Щора [%s]" { channel="mqtt:topic:localMQTTbroker:blinds_control:rsh" }
+// Rollershutter rollershutter "Rollershutter [%s]" { channel="mqtt:topic:localMQTTbroker:blinds_control:rs" }
+Number position "Позиция на щората [%d %%]" { channel="mqtt:topic:localMQTTbroker:blinds_control:pos" }
+// Number position "Rollershutter position [%s]" { channel="mqtt:topic:localMQTTbroker:blinds_control:pos" }
+// Switch power1 "power 1 [%s]" { channel="mqtt:topic:localMQTTbroker:blinds_control:power1" }
+// Switch power2 "power 2 [%s]" { channel="mqtt:topic:localMQTTbroker:blinds_control:power2" }
+
+
+///////////////// SensAir S8 CO@ sensor via ESPeasy ////////////////////////////////
+// Number senseair_s8_CO2                      "НИВО НА СО2 (SenseAir S8) [%d ppm]"                    <carbondioxide> (gPersstOnChngOn1min)                                                       { channel="mqtt:topic:localMQTTbroker:espeasy_senseair_s8:co2" }
+// Number:Temperature senseair_s8_Temperature  "ТЕМПЕРАТУРА за калибрация (SenseAir S8) [%.1f °C]"     <temperature>   (gTemperature_measurments, gBarn_Inside_Temperature, gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:espeasy_senseair_s8:temperature" }
+///////////////// SensAir S8 CO@ sensor via TASMOTA ////////////////////////////////
+//To be used when senseair_s8 is the only sensor on the NodeMCU !!!!!!!!!!!!!!!!
+// Number senseair_s8_CO2                      "НИВО НА СО2 (SenseAir S8) [%d ppm]"                    <carbondioxide> (gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:senseair_s8:co2" }
+// String senseair_s8_Reachable                "Устройството е Online/Offline: [%s]"                   <presence>                              { channel="mqtt:topic:localMQTTbroker:senseair_s8:reachable" }
+
+Number mh_z19b_CO2                      "НИВО НА СО2 (MH-Z19В) [%d ppm]"                    <carbondioxide> (gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:mh_z19b:co2" }
+String mh_z19b_Reachable                "Устройството е Online/Offline: [%s]"                   <presence>                              { channel="mqtt:topic:localMQTTbroker:mh_z19b:reachable" }
+
+// USE WHEN enseAir S8 + Sensirion SCD30 are on the same NodeMCU !!!!!!!!!!!!!!!!!!!!!!!!
+Number senseair_s8_CO2                  "НИВО НА СО2 (SenseAir S8) [%d ppm]"        <carbondioxide> (gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:senseair_s8:s8_co2" }
+String senseair_s8_Reachable            "Устройството е Online/Offline: [%s]"       <presence>                              { channel="mqtt:topic:localMQTTbroker:senseair_s8:reachable" }
+//! Recognized by I2C in Tasmota, but no data?????????????? Commenting it
+// Number scd30_CO2                        "НИВО НА СО2 (SCD30) [%d ppm]"              <carbondioxide> (gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:senseair_s8:scd30_co2" }
+// Number:Temperature scd30_Temperature    "ТЕМПЕРАТУРА (SCD30) [%.1f °C]"             <temperature>   (gTemperature_measurments, gBarn_Inside_Temperature, gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:senseair_s8:scd30_temperature" }
+// Number scd30_Humidity                   "Относителна влажност (SCD30) [%.1f %%]"    <humidity>      (gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:senseair_s8:scd30_humidity" }
+// Number scd30_Dewpoint                   "ТОЧКА НА ОРОСЯВАНЕ (SCD30) [%.1f °C]"      <dewpoint>      (gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:senseair_s8:scd30_dewpoint" }
+// Number scd30_eCO2                       "eCO2 (SCD30) [%d ppm]"                     <carbondioxide> (gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:senseair_s8:scd30_eco2" }
+
+// // this is to be used when scd30 sensor in on seperate NodeMCU (ot together with SenseAir S8)!!!!!!!!!!!!!!!!!!!!!!!!
+// Number scd30_CO2                        "НИВО НА СО2 (SCD30) [%d ppm]"              <carbondioxide> (gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:scd30:co2" }
+// Number:Temperature scd30_Temperature    "ТЕМПЕРАТУРА (SCD30) [%.1f °C]"             <temperature>   (gTemperature_measurments, gBarn_Inside_Temperature, gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:scd30:temperature" }
+// Number scd30_Humidity                   "Относителна влажност (SCD30) [%.1f %%]"    <humidity>      (gPersstOnChngOn1min) { channel="mqtt:topic:localMQTTbroker:scd30:humidity" }
+// Number scd30_Dewpoint                   "ТОЧКА НА ОРОСЯВАНЕ (SCD30) [%.1f °C]"      <dewpoint>      (gPersstOnChngOn1min) { channel="mqtt:topic:localMQTTbroker:scd30:dewpoint" }
+// Number scd30_eCO2                       "eCO2 (SCD30) [%d ppm]"                    <carbondioxide> (gPersstOnChngOn1min) { channel="mqtt:topic:localMQTTbroker:scd30:eco2" }
+// String scd30_Reachable                  "Устройството е Online/Offline: [%s]"       <presence>                            { channel="mqtt:topic:localMQTTbroker:scd30:reachable" }
+
+Number:Temperature ds18b20x4_DS18B20_1_Temperature "ТЕМПЕРАТУРА DS18B20-1 [%.1f °C]"    <temperature>   (gTemperature_measurments, gBarn_Inside_Temperature, gPersstOnChngOn1min)    { channel="mqtt:topic:localMQTTbroker:ds18b20x4:temperature_DS18B20_1" }
+Number:Temperature ds18b20x4_DS18B20_2_Temperature "ТЕМПЕРАТУРА DS18B20-2 [%.1f °C]"    <temperature>   (gTemperature_measurments, gBarn_Inside_Temperature, gPersstOnChngOn1min)    { channel="mqtt:topic:localMQTTbroker:ds18b20x4:temperature_DS18B20_2" }
+Number:Temperature ds18b20x4_DS18B20_3_Temperature "ТЕМПЕРАТУРА DS18B20-3 [%.1f °C]"    <temperature>   (gTemperature_measurments, gBarn_Inside_Temperature, gPersstOnChngOn1min)    { channel="mqtt:topic:localMQTTbroker:ds18b20x4:temperature_DS18B20_3" }
+Number:Temperature ds18b20x4_DS18B20_4_Temperature "ТЕМПЕРАТУРА DS18B20-4 [%.1f °C]"    <temperature>   (gTemperature_measurments, gBarn_Inside_Temperature, gPersstOnChngOn1min)    { channel="mqtt:topic:localMQTTbroker:ds18b20x4:temperature_DS18B20_4" }
+
+Number tsl2561_Illuminance         "Осветеност (TSL2561) [%d lux]"                 <illuminance>    (gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:tsl2561:Illuminance_TSL2561" }
+Number tsl2561_RSSI                "WiFi - СИЛА НА СИГНАЛА [%d %%]"                <network>                                { channel="mqtt:topic:localMQTTbroker:tsl2561:rssi" }
+String tsl2561_Reachable           "Устройството е Online/Offline: [%s]"           <presence>                               { channel="mqtt:topic:localMQTTbroker:tsl2561:reachable" }
+
+Number:Temperature shtc3_Temperature    "ТЕМПЕРАТУРА (SHTC3) [%.1f °C]"                <temperature>   (gTemperature_measurments, gPersstOnChngOn1min)  { channel="mqtt:topic:localMQTTbroker:shtc3:temperature_SHTC3" }
+Number shtc3_Humidity                   "Относителна влажност (SHTC3) [%.1f %%]"       <humidity>      (gPersstOnChngOn1min)                            { channel="mqtt:topic:localMQTTbroker:shtc3:humidity_SHTC3" }
+Number shtc3_Dewpoint                   "ТОЧКА НА ОРОСЯВАНЕ (SHTC3) [%.1f °C]"         <dewpoint>      (gPersstOnChngOn1min)                            { channel="mqtt:topic:localMQTTbroker:shtc3:dewpoint_SHTC3" }
+Number shtc3_RSSI                       "WiFi - СИЛА НА СИГНАЛА [%d %%]"               <network>                                                        { channel="mqtt:topic:localMQTTbroker:shtc3:rssi" }
+String shtc3_Reachable                  "Устройството е Online/Offline: [%s]"          <presence>                                                       { channel="mqtt:topic:localMQTTbroker:shtc3:reachable" }
+
+
+Number:Temperature am2301_Temperature    "ТЕМПЕРАТУРА (AM2301) [%.1f °C]"                <temperature>   (gTemperature_measurments, gPersstOnChngOn1min)  { channel="mqtt:topic:localMQTTbroker:am2301:temperature_AM2301" }
+Number am2301_Humidity                   "Относителна влажност (AM2301) [%.1f %%]"       <humidity>      (gPersstOnChngOn1min)                            { channel="mqtt:topic:localMQTTbroker:am2301:humidity_AM2301" }
+Number am2301_Dewpoint                   "ТОЧКА НА ОРОСЯВАНЕ (AM2301) [%.1f °C]"         <dewpoint>      (gPersstOnChngOn1min)                            { channel="mqtt:topic:localMQTTbroker:am2301:dewpoint_AM2301" }
+Number am2301_RSSI                       "WiFi - СИЛА НА СИГНАЛА [%d %%]"                <network>                                                        { channel="mqtt:topic:localMQTTbroker:am2301:rssi" }
+String am2301_Reachable                  "Устройството е Online/Offline: [%s]"           <presence>                                                       { channel="mqtt:topic:localMQTTbroker:am2301:reachable" }
+
+//Number:Temperature bme280_Temperature    "ТЕМПЕРАТУРА (BME280) [%.1f °C]"                <temperature>   (gTemperature_measurments, gPersstOnChngOn1min)  { channel="mqtt:topic:localMQTTbroker:bme280:temperature_bme280" }
+//Number bme280_Humidity                   "Относителна влажност (BME280) [%.1f %%]"       <humidity>      (gPersstOnChngOn1min)                            { channel="mqtt:topic:localMQTTbroker:bme280:humidity_bme280" }
+//Number bme280_Dewpoint                   "ТОЧКА НА ОРОСЯВАНЕ (BME280) [%.1f °C]"         <dewpoint>      (gPersstOnChngOn1min)                            { channel="mqtt:topic:localMQTTbroker:bme280:dewpoint_bme280" }
+//Number bme280_Pressure                   "АТМОСФЕРНО НАЛЯГАНЕ (BME280) [%.1f hPa]"         <dewpoint>      (gPersstOnChngOn1min)                           { channel="mqtt:topic:localMQTTbroker:bme280:presure_bme280" }
+//Number bme280_RSSI                       "WiFi - СИЛА НА СИГНАЛА [%d %%]"                <network>                                                        { channel="mqtt:topic:localMQTTbroker:bme280:rssi" }
+//String bme280_Reachable                  "Устройството е Online/Offline: [%s]"           <presence>                                                       { channel="mqtt:topic:localMQTTbroker:bme280:reachable" }
+
+
+Number:Temperature nodemcu_device_1_DS18B20_Temperature "ТЕМПЕРАТУРА DS18B20-1 [%.1f °C]"    <temperature>   (gTemperature_measurments, gBarn_Inside_Temperature, gPersstOnChngOn1min)    { channel="mqtt:topic:localMQTTbroker:nodemcu_device_1:temperature_DS18B20" }
+Switch nodemcu_device_1_relay1              "Реле 1"                                        <switch>        { channel="mqtt:topic:localMQTTbroker:nodemcu_device_1:power1" }       
+Switch nodemcu_device_1_relay2              "Реле 2"                                        <switch>        { channel="mqtt:topic:localMQTTbroker:nodemcu_device_1:power2" }       
+Switch nodemcu_device_1_relay3              "Реле 3"                                        <switch>        { channel="mqtt:topic:localMQTTbroker:nodemcu_device_1:power3" }       
+
+Group  sonoff_pow   "Вентилатор кокошарник:"               		<group>        (sonoffpow)
+String sonoffpow_Reachable "Reachable: [%s]"                   <contactable>   (sonoffpow)                                                      { channel="mqtt:topic:localMQTTbroker:sonoffpow:reachable" }
+Switch sonoffpow_Power     "POW POWER"                         <switch>        (sonoffpow, gPersstOnChngOn1minRestOnStup, Gr_ALL_POWER)["Switchable"]{ channel="mqtt:topic:localMQTTbroker:sonoffpow:power" }
+Number sonoffpow_Load      "Power load [%.1f W]"               <voltage>       (sonoffpow, gPersstOnChngOn1min)                                 { channel="mqtt:topic:localMQTTbroker:sonoffpow:powerload" }
+Number sonoffpow_Voltage   "Line voltage [%.1f V]"             <voltage>       (sonoffpow, gPersstOnChngOn1min)                                 { channel="mqtt:topic:localMQTTbroker:sonoffpow:voltage" }
+Number sonoffpow_Current   "Line current [%.3f A]"             <current>       (sonoffpow, gPersstOnChngOn1min)                                 { channel="mqtt:topic:localMQTTbroker:sonoffpow:current" }
+Number sonoffpow_Today     "Total energy today [%.3f kWh]"     <total_energy>  (sonoffpow, gPersstOnChngOn1min)                                 { channel="mqtt:topic:localMQTTbroker:sonoffpow:totaltoday" }
+Number sonoffpow_Yesterday "Total energy yesterday [%.3f kWh]" <total_energy>  (sonoffpow, gPersstOnChngOn1min)                                 { channel="mqtt:topic:localMQTTbroker:sonoffpow:totalyest" }
+Number sonoffpow_Total     "Total energy from start [%.3f kWh]"<total_energy>  (sonoffpow, gPersstOnChngOn1min)                                 { channel="mqtt:topic:localMQTTbroker:sonoffpow:total" }
+Number sonoffpow_RSSI      "WiFi Signal Strength [%d %%]"      <wifi>          (sonoffpow, gPersstOnChngOn1min)                                 { channel="mqtt:topic:localMQTTbroker:sonoffpow:rssi"}

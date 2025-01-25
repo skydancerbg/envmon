@@ -1,0 +1,12 @@
+Switch auto_ventilation_onoff_virtual      "Автоматичен режим ВКЛ./ИЗКЛ."    <switch>     (gPersstOnChngOn1minRestOnStup)
+
+String ventilation_mode_auto "Вентилацията е в автоматичен режим!" <warning_triangle_red>
+String ventilation_device_button_warning "ВНИМАНИЕ! АКО ИЗПОЛЗВАТЕ БУТОНА НА SMART РЕЛЕТО" <warning_triangle_yellow>
+// String ventilation_device_button_warning_2 "АВТОМАТИЧНИЯТ РЕЖИМ ЩЕ БЪДЕ ИЗКЛЮЧЕН!" <warning_triangle_yellow>
+String ventilation_device_button_warning_2 "АВТОМАТИЧНИЯТ РЕЖИМ ЩЕ БЪДЕ ИЗКЛЮЧЕН"  <none>
+String ventilation_device_button_warning_3 "И ВЕНТИЛАЦИЯТА ЩЕ ОСТАНЕ В РЪЧЕН РЕЖИМ, "  <none>
+String ventilation_device_button_warning_4 "В СЪСТОЯНИЕТО ЗАДАДЕНО ЧРЕЗ БУТОНА."  <none>
+
+// Number amonia_level_setpoint //(gPersstOnChngOn1minRestOnStup)
+Number amonia_level_setpoint (gPersstOnChngRestOnStup)
+// Number amonia_level_setpoint_test  <switch>     (gPersstOnChngRestOnStup)
