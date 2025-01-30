@@ -223,3 +223,22 @@ Bridge modbus:tcp:energy_meter [ host="130.204.156.56", port=51502, id=32, timeB
         }
 
 }
+
+// Bridge modbus:tcp:wp3066adam [ host="130.204.156.56", port=51502, id=1, timeBetweenTransactionsMillis=100, rtuEncoded=false ]
+Bridge modbus:tcp:wp3066adam [ host="130.204.156.56", port=51502, id=1, timeBetweenTransactionsMillis=100, rtuEncoded=false ]
+{
+            // Bridge poller temperatures [start = 40000, length = 8, refresh = 10000, type = "holding"]
+            Bridge poller temperatures [start = 0, length = 8, refresh = 10000, type = "holding"]
+        {
+            // Thing data ds18b20_1 [readStart = "40000", readValueType = "uint16", readTransform = "JS(divide10.js)"]
+            Thing data ds18b20_1 [readStart = "0", readValueType = "uint16", readTransform = "JS(divide10.js)"]
+            Thing data ds18b20_2 [readStart = "1", readValueType = "uint16", readTransform = "JS(divide10.js)"]
+            Thing data ds18b20_3 [readStart = "2", readValueType = "uint16", readTransform = "JS(divide10.js)"]
+            Thing data ds18b20_4 [readStart = "3", readValueType = "uint16", readTransform = "JS(divide10.js)"]
+            Thing data ds18b20_5 [readStart = "4", readValueType = "uint16", readTransform = "JS(divide10.js)"]
+            Thing data ds18b20_6 [readStart = "5", readValueType = "uint16", readTransform = "JS(divide10.js)"]
+            Thing data ds18b20_7 [readStart = "6", readValueType = "uint16", readTransform = "JS(divide10.js)"]
+            Thing data ds18b20_8 [readStart = "7", readValueType = "uint16", readTransform = "JS(divide10.js)"]
+        }
+
+}

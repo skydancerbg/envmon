@@ -10,18 +10,162 @@ sitemap demo label="Cyber-physical System (CPS) for Environmental Monitoring" {
         // Frame label="КЪЩАТА НА ДЕСИ И СТЕФАН" {
         Frame label="CURRENT DATE/TIME, SUNSET AND SUNRISE:" {
             Text item=DateTimeBG24hFormat
-            Text item=systems_OK_en
             Text item=Sunrise_Time_en label="Sunrise"
             Text item=Sunset_Time_en label="Sunset"
+            Text item=systems_OK_en
             // Text item=multisensor1_DS18B20_Temperature
-            Text item= bme280_Temperature 
-            Text item= bme280_Humidity 
-            Text item= bme280_Dewpoint 
-            Text item= bme280_Pressure 
-            Text item= bme280_RSSI 
+            // Text item= bme280_Temperature 
+            // Text item= bme280_Humidity 
+            // Text item= bme280_Dewpoint 
+            // Text item= bme280_Pressure 
+            // Text item= bme280_RSSI 
         }
 
-        // Frame label="Демо Стара Загора 2023:" {
+
+
+        Frame label="SENSOR DATA:" {
+            Text item= bme280_Pressure  label="Atmospheric pressure (BME280)"
+            Text item= none             
+            Text item= none             
+            Text item= sensorTHL_Luminosity label="Luminosity (THL-modbus)"
+            Text item= multisensor1_Illuminance label="Illuminance (BH1750)"
+            Text item= none   
+            // https://www.epa.gov/pm-pollution/particulate-matter-pm-basics          
+            // Text item= sensorPM_2dot5 label="Fine inhalable particulate matter 2.5 (Modbus PM2.5)"
+            // Text item= sensorPM_10  label="Inahalable particulate matter 10 (Modbus PM10)"
+            Text item= sensorPM_2dot5 label="Fine inhalable particles PM 2.5 (Modbus PM2.5)"
+            Text item= sensorPM_10  label="Inahalable particles PM 10 (Modbus PM10)"
+            Text item= none  
+            Text item= sensorNH3_amonia label="Ammonia (Modbus NH₃)"
+            Text item= none  
+            Text item= sensorCH4_methane_lel            
+            Text item= sensorCH4_Temperature label="TEMPERATURE (Modbus CH4)"
+            Text item= sensorCH4_Humidity  label="HUMIDITY (Modbus CH4)"
+            Text item= none             
+            Text item= multisensor1_DHT22_Temperature label=" (TEMPERATURE DHT22)"
+            Text item= multisensor1_DHT22_Humidity label="HUMIDITY (DHT22)"
+            Text item= multisensor1_DHT22_Dewpoint label="DEWPOINT (DHT22)"
+            // Text item= shtc3_Temperature 
+            // Text item= shtc3_Humidity 
+            // Text item= shtc3_Dewpoint label="Точка на оросяване - спалня"
+            // Text item= none
+            // Text item= am2301_Temperature //label=""
+            // Text item= am2301_Humidity //label=""
+            // Text item= none             
+            Text item= bme280_Temperature label="TEMPERATURE (BME280)"
+            Text item= bme280_Humidity label="HUMIDITY (BME280)"
+            Text item= bme280_Dewpoint label="DEWPOINT (BME280)"
+            // Text item= bme280_RSSI 
+            // Text item= am2301_Dewpoint
+            // Text item= none
+            Text item= sesnsorTHL_Temperature label="TEMPERATURE (THL-modbus)"
+            Text item= sensorTHL_Humidity     label="HUMIDITY (THL-modbus)" 
+
+            //! Recognized by I2C in Tasmota, but no data?????????????? Commenting it
+            // Text item=scd30_Temperature
+            // Text item=scd30_Humidity               
+            //! Recognized by I2C in Tasmota, but no data?????????????? Commenting it
+            // Text item=scd30_Dewpoint
+
+            // Няма данни?
+            // Text item= multisensor1_DS18B20_Temperature 
+            // ------
+            Text item= ds18b20x4_DS18B20_1_Temperature label="TEMPERATURE (DS18B20-1)"
+            Text item= ds18b20x4_DS18B20_2_Temperature label="TEMPERATURE (DS18B20-2)"
+            Text item= ds18b20x4_DS18B20_3_Temperature label="TEMPERATURE (DS18B20-3)"
+            Text item= ds18b20x4_DS18B20_4_Temperature label="TEMPERATURE (DS18B20-4)"
+
+
+            Text item= modbus8Xds18b20_temp_1 
+
+            // Text item=none
+            // Text item= senseair_s8_CO2
+            // Text item= mh_z19b_CO2
+            //! Recognized by I2C in Tasmota, but no data?????????????? Commenting it
+            // Text item=scd30_CO2                    
+            // Text item=scd30_eCO2                   
+            // Text item=none
+            // Text item= sensorCH4_methane_ppm            
+
+            // Text item= tsl2561_Illuminance
+           
+            // Text item=none
+            // Text item=none
+            // Text item=none
+
+            // Text item=Meter_Power  label="Current power consumption"
+            // // Text item=Meter_TotalKWh  label="Total KWh to date"        
+            // Text item=Meter_Voltage  label="VOLTAGE"
+            // Text item=Meter_Ampers  label="AMPERE"
+        }
+        
+     
+        
+
+        // Frame label="Данни от MODBUS сензорите:" {
+        //     Text item= sesnsorTHL_Temperature 
+        //     Text item= sensorTHL_Humidity 
+        //     Text item= sensorTHL_Luminosity
+        //     Text item=none
+        //     Text item= sensorNH3_amonia
+        //     // Text item= sensorCH4_methane_ppm            
+        //     Text item= sensorPM_2dot5
+        //     Text item= sensorPM_10
+        //     Text item= sensorCH4_methane_lel            
+        //     // Text item=none
+        //     Text item= sensorCH4_Temperature
+        //     Text item= sensorCH4_Humidity               
+        // }
+
+        // Frame label="WiFi MQTT сензори базирани на NodeMCU (ESP_8266):" {
+        //     Text item= multisensor1_DHT22_Temperature 
+        //     Text item= multisensor1_DS18B20_Temperature 
+        //     Text item= multisensor1_DHT22_Humidity 
+        //     Text item= multisensor1_DHT22_Dewpoint
+        //     Text item= multisensor1_Illuminance 
+        //     Text item= multisensor1_RSSI 
+        //     Text item= multisensor1_Reachable
+        //     // Text item=none
+        //     Text item=senseair_s8_CO2
+        //     // Text item=senseair_s8_Temperature
+        //     Text item= mh_z19b_CO2
+        //     // Text item=scd30_CO2                    
+        //     // Text item=scd30_Temperature
+        //     // Text item=scd30_Humidity               
+        //     // Text item=scd30_Dewpoint               
+        //     // Text item=scd30_eCO2                   
+        //     // Text item=scd30_Reachable              
+
+        // }
+
+        Frame label="ORNO WE-515 Multitariff Electricity Meter - MODBUS" {
+            Text item=Meter_Power  label="Current power consumption"
+            Text item=Meter_Voltage  label="VOLTAGE"
+            Text item=Meter_Ampers  label="AMPERE"
+            Text item=Meter_TotalKWh  label="Energy consumption to date"        
+            Text item=Meter_Hz  label="Line frequency Hz"
+            Text item=Meter_Reactive_power  label="Reactive_power"
+            Text item=Meter_Apparent_power  label="Apparent_power"
+            Text item=Meter_Power_factor  label="Power_factor"
+            Text item=Meter_TotalKWh  label="Total KWh"        
+            // Text item=none
+            Text item=Meter_TotalKWhT1  label="Total KWh Tarrif 1"
+            Text item=Meter_TotalKWhT2  label="Total KWh Tarrif 2"
+            Text item=Meter_TotalKWhT3  label="Total KWh Tarrif 3"
+            Text item=Meter_TotalKWhT4  label="Total KWh Tarrif 4"
+            Text item=Meter_Totalkvarh  label="Total kvarh"
+            // Text item=none
+            Text item=Meter_TotalkvarhT1  label="Total kvarh Tarrif 1"
+            Text item=Meter_TotalkvarhT2  label="Total kvarh Tarrif 2"
+            Text item=Meter_TotalkvarhT3  label="Total kvarh Tarrif 3"
+            Text item=Meter_TotalkvarhT4  label="Total kvarh Tarrif 4"
+        }
+    }
+
+   //////////////////////////////////////////////////////////////////////////////////////////////////
+   //////////////////////////////////////////////////////////////////////////////////////////////////////
+   ///////////////////////////////////////////////////////////////////////////////////////////////////
+           // Frame label="Демо Стара Загора 2023:" {
         //     // Ръчно управление на Отопление/Охлаждане
         //     Text item= nodemcu_device_1_DS18B20_Temperature 
         //     Switch  item=nodemcu_device_1_relay1   icon="switch"    label="ЧЕРВЕН"      //"Отопление Вкл./Изкл."
@@ -29,174 +173,60 @@ sitemap demo label="Cyber-physical System (CPS) for Environmental Monitoring" {
         //     Switch  item=nodemcu_device_1_relay3   icon="switch"    label="ЗЕЛЕН"      //"Охлаждане Вкл./Изкл."
  
         // }
+//    Frame label="Ръчно управление на Отопление/Охлаждане:" {
+//             Switch  item=multisensor1_relay1   icon="switch"    label="Отопление Вкл./Изкл."
+//             Switch  item=multisensor1_relay2   icon="switch"    label="Охлаждане Вкл./Изкл."
+ 
+//         }
 
-        Frame label="УПРАВЛЕНИЕ ВЕНТИЛАЦИЯ:" icon="fan" {    
+        // Frame label="Ръчно управление на щори:" {
+        //     Default item=proxy_rollershutter
+        //     Slider item=proxy_rollershutter label="Позиция на щората [%d %%]"
+        //     // Switch item=proxy_rollershutter mappings=[0="Затворена",15="15%", 30="30%", 50="50%",  65="65%" , 80="80%", 100="Отворена"]
+        //     Switch item=proxy_rollershutter label="Щора" mappings=[NULL= "Затворена", 15="15%", 30="30%", 50="50%",  65="65%" , 80="80%", 100="Отворена"]
 
-            Switch item=auto_ventilation_onoff_virtual icon="switch"
-            // Text item=none
-            // Switch item=sonoffpow_Power icon="switch" visibility=[auto_ventilation_onoff_virtual!=ON]
-            Switch item=sonoffpow_Power icon="switch" label="Ръчно управление вентилатор - Вкл./Изкл." visibility=[auto_ventilation_onoff_virtual !=ON]
-            // Text item=ventilation_mode_auto label="Вентилацията е в автоматичен режим!" visibility=[auto_ventilation_onoff_virtual!=ON]
-            Text item=ventilation_mode_auto label="Вентилацията е в автоматичен режим!" visibility=[auto_ventilation_onoff_virtual==ON]
-            // Text item=none visibility=[auto_ventilation_onoff_virtual==ON]
-            // Text item=none visibility=[auto_ventilation_onoff_virtual==ON]
-            Text item=ventilation_device_button_warning visibility=[auto_ventilation_onoff_virtual==ON]
-            Text item=ventilation_device_button_warning_2 visibility=[auto_ventilation_onoff_virtual==ON]
-            Text item=ventilation_device_button_warning_3 visibility=[auto_ventilation_onoff_virtual==ON]
-            Text item=ventilation_device_button_warning_4 visibility=[auto_ventilation_onoff_virtual==ON]
-            Text item= sensorNH3_amonia
-            // Setpoint    item= amonia_level_setpoint      icon="settings"      label="Поддържай ниво на NH3 по-малко от: [%.1f ppm]"    minValue=5 maxValue=25 step=0.5 
-            Setpoint    item= amonia_level_setpoint      icon="settings"      label="Задай максимално допустимо ниво NH3: [%.1f ppm]"    minValue=5 maxValue=25 step=0.5 
-            // Setpoint    item= amonia_level_setpoint_test      icon="settings"      label="TEST: [%.1f ppm]"    minValue=5 maxValue=25 step=0.5 
-			}
+        // }        
+
+        // Frame label="Ръчно управление на вентилатор:" {
+        //     Switch item=fan label="Вентилатор Вкл./Изкл."
+        //     Slider item=fan_Dimmer label="Вентилатор обороти [%d %% об/мин]" minValue=22 maxValue=100 step=1
+        //     Switch item=fan_Dimmer label="Вентилатор обороти [%d %% RPM]" mappings=[0="Изкл.", 1="1%",18="18%" ,22="22%", 50="50%", 100="100%"]
+        // }
+       
+        // Frame label="УПРАВЛЕНИЕ ВЕНТИЛАЦИЯ:" icon="fan" {    
+
+        //     Switch item=auto_ventilation_onoff_virtual icon="switch"
+        //     // Text item=none
+        //     // Switch item=sonoffpow_Power icon="switch" visibility=[auto_ventilation_onoff_virtual!=ON]
+        //     Switch item=sonoffpow_Power icon="switch" label="Ръчно управление вентилатор - Вкл./Изкл." visibility=[auto_ventilation_onoff_virtual !=ON]
+        //     // Text item=ventilation_mode_auto label="Вентилацията е в автоматичен режим!" visibility=[auto_ventilation_onoff_virtual!=ON]
+        //     Text item=ventilation_mode_auto label="Вентилацията е в автоматичен режим!" visibility=[auto_ventilation_onoff_virtual==ON]
+        //     // Text item=none visibility=[auto_ventilation_onoff_virtual==ON]
+        //     // Text item=none visibility=[auto_ventilation_onoff_virtual==ON]
+        //     Text item=ventilation_device_button_warning visibility=[auto_ventilation_onoff_virtual==ON]
+        //     Text item=ventilation_device_button_warning_2 visibility=[auto_ventilation_onoff_virtual==ON]
+        //     Text item=ventilation_device_button_warning_3 visibility=[auto_ventilation_onoff_virtual==ON]
+        //     Text item=ventilation_device_button_warning_4 visibility=[auto_ventilation_onoff_virtual==ON]
+        //     Text item= sensorNH3_amonia
+        //     // Setpoint    item= amonia_level_setpoint      icon="settings"      label="Поддържай ниво на NH3 по-малко от: [%.1f ppm]"    minValue=5 maxValue=25 step=0.5 
+        //     Setpoint    item= amonia_level_setpoint      icon="settings"      label="Задай максимално допустимо ниво NH3: [%.1f ppm]"    minValue=5 maxValue=25 step=0.5 
+        //     // Setpoint    item= amonia_level_setpoint_test      icon="settings"      label="TEST: [%.1f ppm]"    minValue=5 maxValue=25 step=0.5 
+		// 	}
             
 			
-			Frame label="ЕЛ. КОНСУМАЦИЯ ВЕНТИЛАТОР:" icon="fan" {    
+		// 	Frame label="ЕЛ. КОНСУМАЦИЯ ВЕНТИЛАТОР:" icon="fan" {    
 
-            Switch  item=sonoffpow_Power   icon="switch"  
-            // Text item=sonoffpow_Power    
-            Text item=sonoffpow_Load        label="Моментна консумаирана мощност" icon="electric_meter"
-            Text item=sonoffpow_Voltage     label="Мрежово напрежение" icon="energy"
-            Text item=sonoffpow_Current     label="Ток потребяван от консуматора" icon="energy"
-            Text item=sonoffpow_Today       label="Консумация на енергия днес (KWh)" icon="energy-meter-2"
-            Text item=sonoffpow_Yesterday   label="Консумация на енергия вчера (KWh)" icon="energy-meter-2"
-            Text item=sonoffpow_Total       label="Общо консумация на енергия към момента (KWh)" icon="energy-meter-2"
-            Text item=sonoffpow_Reachable icon="network"
-            Text item=sonoffpow_RSSI icon="qualityofservice"
-            Text item=sonoffpow_RSSI icon="qualityofservice"
+        //     Switch  item=sonoffpow_Power   icon="switch"  
+        //     // Text item=sonoffpow_Power    
+        //     Text item=sonoffpow_Load        label="Моментна консумаирана мощност" icon="electric_meter"
+        //     Text item=sonoffpow_Voltage     label="Мрежово напрежение" icon="energy"
+        //     Text item=sonoffpow_Current     label="Ток потребяван от консуматора" icon="energy"
+        //     Text item=sonoffpow_Today       label="Консумация на енергия днес (KWh)" icon="energy-meter-2"
+        //     Text item=sonoffpow_Yesterday   label="Консумация на енергия вчера (KWh)" icon="energy-meter-2"
+        //     Text item=sonoffpow_Total       label="Общо консумация на енергия към момента (KWh)" icon="energy-meter-2"
+        //     Text item=sonoffpow_Reachable icon="network"
+        //     Text item=sonoffpow_RSSI icon="qualityofservice"
+        //     Text item=sonoffpow_RSSI icon="qualityofservice"
 
-	    }
+	    // }
 
-        Frame label="Данни от сензорите:" {
-            Text item= sensorCH4_Temperature
-            Text item= sensorCH4_Humidity               
-            Text item= multisensor1_DHT22_Temperature 
-            Text item= multisensor1_DHT22_Humidity
-            Text item= shtc3_Temperature 
-            Text item= shtc3_Humidity 
-            // Text item= shtc3_Dewpoint label="Точка на оросяване - спалня"
-            // Text item= none
-            Text item= am2301_Temperature 
-            Text item= am2301_Humidity 
-            Text item= bme280_Temperature 
-            Text item= bme280_Humidity 
-            Text item= bme280_Dewpoint 
-            Text item= bme280_Pressure 
-            Text item= bme280_RSSI 
-            // Text item= am2301_Dewpoint
-            // Text item= none
-
-            //! Recognized by I2C in Tasmota, but no data?????????????? Commenting it
-            // Text item=scd30_Temperature
-            // Text item=scd30_Humidity               
-            Text item= multisensor1_DHT22_Dewpoint
-            //! Recognized by I2C in Tasmota, but no data?????????????? Commenting it
-            // Text item=scd30_Dewpoint
-
-            Text item= multisensor1_DS18B20_Temperature 
-            Text item= ds18b20x4_DS18B20_1_Temperature 
-            Text item= ds18b20x4_DS18B20_2_Temperature 
-            Text item= ds18b20x4_DS18B20_3_Temperature 
-            Text item= ds18b20x4_DS18B20_4_Temperature 
-            // Text item=none
-            Text item= senseair_s8_CO2
-            Text item= mh_z19b_CO2
-            //! Recognized by I2C in Tasmota, but no data?????????????? Commenting it
-            // Text item=scd30_CO2                    
-            // Text item=scd30_eCO2                   
-            Text item= sensorNH3_amonia
-            // Text item=none
-            // Text item= sensorCH4_methane_ppm            
-            Text item= sensorCH4_methane_lel            
-            Text item= sensorPM_2dot5
-            Text item= sensorPM_10
-
-            Text item= tsl2561_Illuminance
-            Text item= multisensor1_Illuminance 
-            Text item=Meter_Power  label="Current power consumption"
-            Text item=Meter_TotalKWh  label="Total KWh to date"        
-            Text item=Meter_Voltage  label="VOLTAGE"
-            Text item=Meter_Ampers  label="Ampers"
-        }
-        
-        Frame label="Ръчно управление на Отопление/Охлаждане:" {
-            Switch  item=multisensor1_relay1   icon="switch"    label="Отопление Вкл./Изкл."
-            Switch  item=multisensor1_relay2   icon="switch"    label="Охлаждане Вкл./Изкл."
- 
-        }
-
-        Frame label="Ръчно управление на щори:" {
-            Default item=proxy_rollershutter
-            Slider item=proxy_rollershutter label="Позиция на щората [%d %%]"
-            // Switch item=proxy_rollershutter mappings=[0="Затворена",15="15%", 30="30%", 50="50%",  65="65%" , 80="80%", 100="Отворена"]
-            Switch item=proxy_rollershutter label="Щора" mappings=[NULL= "Затворена", 15="15%", 30="30%", 50="50%",  65="65%" , 80="80%", 100="Отворена"]
-
-        }        
-
-        Frame label="Ръчно управление на вентилатор:" {
-            Switch item=fan label="Вентилатор Вкл./Изкл."
-            Slider item=fan_Dimmer label="Вентилатор обороти [%d %% об/мин]" minValue=22 maxValue=100 step=1
-            Switch item=fan_Dimmer label="Вентилатор обороти [%d %% RPM]" mappings=[0="Изкл.", 1="1%",18="18%" ,22="22%", 50="50%", 100="100%"]
-        }
-
-        Frame label="Данни от MODBUS сензорите:" {
-            Text item= sesnsorTHL_Temperature 
-            Text item= sensorTHL_Humidity 
-            Text item= sensorTHL_Luminosity
-            Text item=none
-            Text item= sensorNH3_amonia
-            // Text item= sensorCH4_methane_ppm            
-            Text item= sensorPM_2dot5
-            Text item= sensorPM_10
-            Text item= sensorCH4_methane_lel            
-            // Text item=none
-            Text item= sensorCH4_Temperature
-            Text item= sensorCH4_Humidity               
-        }
-
-        Frame label="WiFi MQTT сензори базирани на NodeMCU (ESP_8266):" {
-            Text item= multisensor1_DHT22_Temperature 
-            Text item= multisensor1_DS18B20_Temperature 
-            Text item= multisensor1_DHT22_Humidity 
-            Text item= multisensor1_DHT22_Dewpoint
-            Text item= multisensor1_Illuminance 
-            Text item= multisensor1_RSSI 
-            Text item= multisensor1_Reachable
-            // Text item=none
-            Text item=senseair_s8_CO2
-            // Text item=senseair_s8_Temperature
-            Text item= mh_z19b_CO2
-            // Text item=scd30_CO2                    
-            // Text item=scd30_Temperature
-            // Text item=scd30_Humidity               
-            // Text item=scd30_Dewpoint               
-            // Text item=scd30_eCO2                   
-            // Text item=scd30_Reachable              
-
-        }
-
-   Frame label="ORNO WE-515 Multitariff Electricity Meter - MODBUS" {
-        Text item=Meter_Power  label="Моментна консумаирана мощност - сървър и сензори"
-        Text item=Meter_TotalKWh  label="Потребена енергия до ммомента"        
-        Text item=Meter_Voltage  label="VOLTAGE"
-        Text item=Meter_Ampers  label="Ampers"
-        Text item=Meter_Hz  label="Line frequency Hz"
-        Text item=Meter_Reactive_power  label="Reactive_power"
-        Text item=Meter_Apparent_power  label="Apparent_power"
-        Text item=Meter_Power_factor  label="Power_factor"
-        Text item=Meter_TotalKWh  label="Total KWh"        
-        Text item=none
-        Text item=Meter_TotalKWhT1  label="Total KWh Tarrif 1"
-        Text item=Meter_TotalKWhT2  label="Total KWh Tarrif 2"
-        Text item=Meter_TotalKWhT3  label="Total KWh Tarrif 3"
-        Text item=Meter_TotalKWhT4  label="Total KWh Tarrif 4"
-        Text item=Meter_Totalkvarh  label="Total kvarh"
-        Text item=none
-        Text item=Meter_TotalkvarhT1  label="Total kvarh Tarrif 1"
-        Text item=Meter_TotalkvarhT2  label="Total kvarh Tarrif 2"
-        Text item=Meter_TotalkvarhT3  label="Total kvarh Tarrif 3"
-        Text item=Meter_TotalkvarhT4  label="Total kvarh Tarrif 4"
-    }
-
-    
-}

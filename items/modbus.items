@@ -42,4 +42,7 @@ Number Meter_TotalkvarhT1                   "totalkvarhT1   [%.2f kvar]"        
 Number Meter_TotalkvarhT2                   "totalkvarhT2   [%.2f kvar]"                    <electric_meter>                         { channel="modbus:data:energy_meter:totalkvarh:totalkvarhT2:number" }
 Number Meter_TotalkvarhT3                   "totalkvarhT3   [%.2f kvar]"                    <electric_meter>                         { channel="modbus:data:energy_meter:totalkvarh:totalkvarhT3:number" }
 Number Meter_TotalkvarhT4                   "totalkvarhT4   [%.2f kvar]"                    <electric_meter>                         { channel="modbus:data:energy_meter:totalkvarh:totalkvarhT4:number" }
- 
+
+
+
+Number:Temperature modbus8Xds18b20_temp_1   "ТЕМПЕРАТУРА (Modbus WP3066ADAM_1 ) [%.1f °C]"  <temperature> (gPersstOnChngOn1min)  { channel="modbus:data:wp3066adam:temperatures:ds18b20_1:number" }
