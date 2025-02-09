@@ -1,3 +1,22 @@
+/////// Shool 0000 indoors multisensor 1
+Number bg0000_mhz19b_co2                      "НИВО НА СО2 (MH-Z19В) [%d ppm]"                <carbondioxide> (gPersstOnChngOn1min) { channel="mqtt:topic:localMQTTbroker:bg0000:mhz19b_co2" }
+Number:Temperature bg0000_mhz19b_Temperature  "ТЕМПЕРАТУРА (MH-Z19В) [%.1f °C]"               <temperature>   (gPersstOnChngOn1min) { channel="mqtt:topic:localMQTTbroker:bg0000:mhz19b_temperature" }
+Number:Temperature bg0000_bme680_Temperature  "ТЕМПЕРАТУРА (BME680) [%.1f °C]"                <temperature>   (gPersstOnChngOn1min) { channel="mqtt:topic:localMQTTbroker:bg0000:bme680_temperature" }
+Number bg0000_bme680_Humidity                 "Относителна влажност (BME680) [%.1f %%]"       <humidity>      (gPersstOnChngOn1min) { channel="mqtt:topic:localMQTTbroker:bg0000:bme680_humidity" }
+Number bg0000_bme680_Dewpoint                 "ТОЧКА НА ОРОСЯВАНЕ (BME680) [%.1f °C]"         <dewpoint>      (gPersstOnChngOn1min) { channel="mqtt:topic:localMQTTbroker:bg0000:bme680_dewpoint" }
+Number bg0000_bme680_Pressure                 "АТМОСФЕРНО НАЛЯГАНЕ (BME680) [%.1f hPa]"       <pressure>      (gPersstOnChngOn1min) { channel="mqtt:topic:localMQTTbroker:bg0000:bme680_presure" }
+Number bg0000_bme680_Gas                      "ВРЕДНИ ГАЗОВЕ - VOC (BME680) [%.2f kΩ]"        <smoke>         (gPersstOnChngOn1min) { channel="mqtt:topic:localMQTTbroker:bg0000:bme680_gas" }
+Number bg0000_sgp30_eCO2                      "eCO2 (SGP30) [%d ppm]"                         <carbondioxide> (gPersstOnChngOn1min) { channel="mqtt:topic:localMQTTbroker:bg0000:sgp30_eco2" }
+Number bg0000_sgp30_TVOC                      "ВРЕДНИ ГАЗОВЕ - TVOC (SGP30) [%d ppb]"         <smoke>         (gPersstOnChngOn1min) { channel="mqtt:topic:localMQTTbroker:bg0000:sgp30_tvoc" }
+Number bg0000_sgp30_aHumidity                 "АБСОЛЮТНА ВЛАЖНОСТ (SGP30) [%.4f g/m3]"        <humidity>      (gPersstOnChngOn1min) { channel="mqtt:topic:localMQTTbroker:bg0000:sgp30_ahumidity" }
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////
+
 Switch multisensor1_relay1              "Реле 1"                                        <switch>        { channel="mqtt:topic:localMQTTbroker:multisensor1:power1" }       
 Switch multisensor1_relay2              "Реле 2"                                        <switch>        { channel="mqtt:topic:localMQTTbroker:multisensor1:power2" }       
 Number:Temperature multisensor1_DHT22_Temperature   "ТЕМПЕРАТУРА (AM2301) [%.1f °C]"                <temperature>   (gTemperature_measurments, gBarn_Inside_Temperature, gPersstOnChngOn1min)   { channel="mqtt:topic:localMQTTbroker:multisensor1:temperature_DHT22" }
@@ -98,3 +117,7 @@ Number sonoffpow_Today     "Total energy today [%.3f kWh]"     <total_energy>  (
 Number sonoffpow_Yesterday "Total energy yesterday [%.3f kWh]" <total_energy>  (sonoffpow, gPersstOnChngOn1min)                                 { channel="mqtt:topic:localMQTTbroker:sonoffpow:totalyest" }
 Number sonoffpow_Total     "Total energy from start [%.3f kWh]"<total_energy>  (sonoffpow, gPersstOnChngOn1min)                                 { channel="mqtt:topic:localMQTTbroker:sonoffpow:total" }
 Number sonoffpow_RSSI      "WiFi Signal Strength [%d %%]"      <wifi>          (sonoffpow, gPersstOnChngOn1min)                                 { channel="mqtt:topic:localMQTTbroker:sonoffpow:rssi"}
+
+
+
+String sid0000_Reachable                "Устройството е Online/Offline: [%s]"               <presence>                                                      { channel="mqtt:topic:localMQTTbroker:school0000:reachable" }

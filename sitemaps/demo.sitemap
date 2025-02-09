@@ -42,9 +42,6 @@ sitemap demo label="Cyber-physical System (CPS) for Environmental Monitoring" {
             Text item= sensorCH4_Temperature label="TEMPERATURE (Modbus CH4)"
             Text item= sensorCH4_Humidity  label="HUMIDITY (Modbus CH4)"
             Text item= none             
-            Text item= multisensor1_DHT22_Temperature label=" (TEMPERATURE DHT22)"
-            Text item= multisensor1_DHT22_Humidity label="HUMIDITY (DHT22)"
-            Text item= multisensor1_DHT22_Dewpoint label="DEWPOINT (DHT22)"
             // Text item= shtc3_Temperature 
             // Text item= shtc3_Humidity 
             // Text item= shtc3_Dewpoint label="Точка на оросяване - спалня"
@@ -52,15 +49,19 @@ sitemap demo label="Cyber-physical System (CPS) for Environmental Monitoring" {
             // Text item= am2301_Temperature //label=""
             // Text item= am2301_Humidity //label=""
             // Text item= none             
+            // Text item= bme280_RSSI 
+            // Text item= am2301_Dewpoint
+            Text item= sesnsorTHL_Temperature label="TEMPERATURE (THL-modbus)"
+            Text item= sensorTHL_Humidity     label="HUMIDITY (THL-modbus)" 
+            Text item= none
+
+            Text item= multisensor1_DHT22_Temperature label=" (TEMPERATURE DHT22)"
+            Text item= multisensor1_DHT22_Humidity label="HUMIDITY (DHT22)"
+            Text item= multisensor1_DHT22_Dewpoint label="DEWPOINT (DHT22)"
+
             Text item= bme280_Temperature label="TEMPERATURE (BME280)"
             Text item= bme280_Humidity label="HUMIDITY (BME280)"
             Text item= bme280_Dewpoint label="DEWPOINT (BME280)"
-            // Text item= bme280_RSSI 
-            // Text item= am2301_Dewpoint
-            // Text item= none
-            Text item= sesnsorTHL_Temperature label="TEMPERATURE (THL-modbus)"
-            Text item= sensorTHL_Humidity     label="HUMIDITY (THL-modbus)" 
-
             //! Recognized by I2C in Tasmota, but no data?????????????? Commenting it
             // Text item=scd30_Temperature
             // Text item=scd30_Humidity               
@@ -70,15 +71,21 @@ sitemap demo label="Cyber-physical System (CPS) for Environmental Monitoring" {
             // Няма данни?
             // Text item= multisensor1_DS18B20_Temperature 
             // ------
+            // Text item=none            
+            // Text item= bme280_Temperature label="TEMPERATURE (BME280)"
+            // Text item=none
+            // Text item=none
             Text item= ds18b20x4_DS18B20_1_Temperature label="TEMPERATURE (DS18B20-1)"
             Text item= ds18b20x4_DS18B20_2_Temperature label="TEMPERATURE (DS18B20-2)"
             Text item= ds18b20x4_DS18B20_3_Temperature label="TEMPERATURE (DS18B20-3)"
             Text item= ds18b20x4_DS18B20_4_Temperature label="TEMPERATURE (DS18B20-4)"
+            Text item=none
+            Text item=none
 
-
-            Text item= modbus8Xds18b20_temp_1 
-
-            // Text item=none
+            Text item= modbus8Xds18b20_temp_1 label="PROJECT ELECTRICAL BOX TEMPERATURE"
+            Text item=none
+            Text item= mh_z19b_CO2  label="INDOORS CO2 LEVEL (MH-Z19В)"
+            
             // Text item= senseair_s8_CO2
             // Text item= mh_z19b_CO2
             //! Recognized by I2C in Tasmota, but no data?????????????? Commenting it

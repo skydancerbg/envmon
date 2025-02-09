@@ -1,6 +1,29 @@
 Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="213.191.208.75", port=51883, secure=false, username="deviceusr", password="devicepass", clientID="oh4DEMOsrv" ]
 
 {
+// 16:59:46.007 MQT: tele/id0000_multisensor1/SENSOR = {"Time":"2025-02-08T16:59:46","BME680":{"Temperature":29.7,"Humidity":14.0,"DewPoint":-0.6,"Pressure":971.9,"Gas":66.13},"MHZ19B":{"Model":"B","CarbonDioxide":400,"Temperature":16.0},"SGP30":{"eCO2":1070,"TVOC":585,"aHumidity":4.1644},"PressureUnit":"hPa","TempUnit":"C"}  
+// "BME680":{"":29.7,"":14.0,"":-0.6,"":971.9,"":66.13},
+// "MHZ19B":{"Model":"B","CarbonDioxide":400,"Temperature":16.0},
+// "SGP30":{"eCO2":1070,"TVOC":585,"aHumidity":4.1644}
+// ,"PressureUnit":"hPa","TempUnit":"C"}  
+
+    Thing topic bg0000 "bg0000Sensors" @ "Shool classroom" {
+        Channels:
+            Type number : mhz19b_co2            "CO2"                   [ stateTopic="tele/id0000_multisensor1/SENSOR", transformationPattern="JSONPATH:$.MHZ19B.CarbonDioxide" ]
+            Type number : mhz19b_temperature    "Temperature"           [ stateTopic="tele/id0000_multisensor1/SENSOR", transformationPattern="JSONPATH:$.MHZ19B.Temperature" ]
+            Type number : bme680_temperature    "Temperature"           [ stateTopic="tele/id0000_multisensor1/SENSOR", transformationPattern="JSONPATH:$.BME680.Temperature" ]
+            Type number : bme680_humidity       "Humidity"              [ stateTopic="tele/id0000_multisensor1/SENSOR", transformationPattern="JSONPATH:$.BME680.Humidity" ]
+            Type number : bme680_dewpoint       "DewPoint"              [ stateTopic="tele/id0000_multisensor1/SENSOR", transformationPattern="JSONPATH:$.BME680.DewPoint" ]
+            Type number : bme680_presure        "Pressure"              [ stateTopic="tele/id0000_multisensor1/SENSOR", transformationPattern="JSONPATH:$.BME680.Pressure" ]
+            Type number : bme680_gas            "Gas"                   [ stateTopic="tele/id0000_multisensor1/SENSOR", transformationPattern="JSONPATH:$.BME680.Gas" ]
+            Type number : sgp30_eco2            "eCO2"                  [ stateTopic="tele/id0000_multisensor1/SENSOR", transformationPattern="JSONPATH:$.SGP30.eCO2" ]
+            Type number : sgp30_tvoc            "TVOC"                  [ stateTopic="tele/id0000_multisensor1/SENSOR", transformationPattern="JSONPATH:$.SGP30.TVOC" ]
+            Type number : sgp30_ahumidity       "aHumidity"             [ stateTopic="tele/id0000_multisensor1/SENSOR", transformationPattern="JSONPATH:$.SGP30.aHumidity" ]
+
+            Type string : reachable             "Reachable"             [ stateTopic="tele/id0000_multisensor1/LWT" ]
+            Type number : rssi                  "WiFi Signal Strength"  [ stateTopic="tele/id0000_multisensor1/STATE",  transformationPattern="JSONPATH:$.Wifi.RSSI"]
+    }
+
 
     // {"Time":"2022-01-28T17:30:40","AM2301":{"Temperature":23.6,"Humidity":31.7,"DewPoint":5.8},"BH1750":{"Illuminance":15},"TempUnit":"C"}
     Thing topic multisensor1 "Multisensor" @ "Demo panel" {
@@ -273,3 +296,4 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="213.191.208.75", po
 //     Type string : devicestate   "Device State"      [ stateTopic="home/workroom/light/tele/LWT" ]
 
 // SHUTTERPOSITION1
+

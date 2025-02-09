@@ -1,0 +1,4 @@
+/////// House Zigbee THP sensor
+Number:Temperature house_office_Temperature  "ТЕМПЕРАТУРА (AQARA THP) [%.1f °C]"                <temperature>   (gPersstOnChngOn1min) { channel="mqtt:topic:houseMQTTbroker:house_office:temperature" }
+Number house_office_Humidity                 "Относителна влажност (AQARA THP) [%.1f %%]"       <humidity>      (gPersstOnChngOn1min) { channel="mqtt:topic:houseMQTTbroker:house_office:humidity" }
+Number house_office_Pressure                 "АТМОСФЕРНО НАЛЯГАНЕ (AQARA THP) [%.1f hPa]"       <pressure>      (gPersstOnChngOn1min) { channel="mqtt:topic:houseMQTTbroker:house_office:presure" }
